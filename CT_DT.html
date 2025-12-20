@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý danh sách đăng ký nguyện vọng</title>
+    
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/index.css"> 
+    <link rel="stylesheet" href="/CSS/CT_DT.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/img/82cb2669b39c7ae0fe1d18507ed7c609168a2ad3.png" alt="Logo VLU">
+            </div>
+            <ul class="menu">
+
+                <li class="menu-item">
+                    <div class="menu-link active-parent"> <span><i class="fa-solid fa-layer-group"></i> Đợt đồ án</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu open"> <li><a href="index.html" class="active-sub">Quản lý đợt đồ án</a></li>
+                        <li><a href="DS_DK.html">Danh sách đăng ký</a></li>
+                        <li><a href="DS_DT.html">Danh sách đề tài</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-users"></i> Hội đồng</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="HD_DT.html">Duyệt đề tài</a></li>
+                        <li><a href="HD_BC.html">Báo cáo hội đồng</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-list"></i> Danh mục</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="QL_Nganh.html">Ngành</a></li>
+                        <li><a href="QL_BoMon.html" class="active-sub">Bộ môn</a></li> 
+                        <li><a href="QL_ChuyenNganh.html">Chuyên ngành</a></li>
+                        <li><a href="QL_HocKi.html">Học kì</a></li>
+                        <li><a href="QL_Khoa.html">Khóa</a></li>
+                        <li><a href="QL_CT.html">Chương trình</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="QL_NguoiDung.html" class="menu-link">
+                        <span><i class="fa-solid fa-user-gear"></i> Người dùng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="CH_MAIL.html" class="menu-link">
+                        <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="BCTK.html" class="menu-link">
+                        <span><i class="fa-solid fa-chart-pie"></i> Báo cáo và thống kê</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="uni-name">TRƯỜNG ĐẠI HỌC VĂN LANG</div>
+
+                <div class="header-right-group">
+        
+                <div class="notification-container" id="notifDropdownBtn">
+                    <div class="bell-icon-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge">3</span> </div>
+                    
+                    <div class="notif-dropdown-menu" id="notifDropdown">
+                        <div class="notif-header">
+                            <span>Thông báo</span>
+                            <a href="#" class="mark-read">Đánh dấu đã đọc</a>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Nhắc nhở mở đợt đăng ký</p>
+                                    <p class="n-time">Vừa xong</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Hội đồng KTPM 01 đã được duyệt</p>
+                                    <p class="n-time">1 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Sinh viên nộp báo cáo tiến độ</p>
+                                    <p class="n-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown-container" id="userDropdown">
+                    <div class="user-profile">
+                        <div class="user-info-text">
+                            <span class="user-name">Admin 2174802010297</span>
+                            <span class="user-role">BCN Khoa</span>
+                        </div>
+                        <i class="fa-regular fa-circle-user user-avatar-icon"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-id-badge"></i> Hồ sơ cá nhân
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item logout-item">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="content-body">
+                
+                <div class="detail-container">
+                    
+                    <div class="info-section">
+                        
+                        <div class="form-header">
+                            <a href="QL_DS_DeTai.html" class="btn-back-circle" title="Quay lại danh sách">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                            <h3 class="form-title">Chi tiết đề tài</h3>
+                        </div>
+
+                        <div class="detail-group">
+                            <label>Tên đề tài:</label>
+                            <input type="text" class="detail-control" id="dtName" readonly>
+                        </div>
+
+                        <div style="display: flex; gap: 20px;">
+                            <div class="detail-group" style="flex: 1;">
+                                <label>Sinh viên thực hiện:</label>
+                                <input type="text" class="detail-control" id="dtStudent" readonly>
+                            </div>
+                            <div class="detail-group" style="flex: 1;">
+                                <label>Giảng viên hướng dẫn:</label>
+                                <input type="text" class="detail-control" id="dtSupervisor" readonly>
+                            </div>
+                        </div>
+
+                        <div class="detail-group">
+                            <label>Mục tiêu chính:</label>
+                            <textarea class="detail-control" id="dtGoal" readonly></textarea>
+                        </div>
+
+                        <div class="detail-group">
+                            <label>Công nghệ sử dụng:</label>
+                            <input type="text" class="detail-control" id="dtTech" readonly>
+                        </div>
+
+                        <div class="detail-group">
+                            <label>Kết quả dự kiến:</label>
+                            <textarea class="detail-control" id="dtResult" readonly></textarea>
+                        </div>
+
+                        <div class="detail-group">
+                            <label>Yêu cầu / Tính mới:</label>
+                            <textarea class="detail-control" id="dtRequirement" readonly></textarea>
+                        </div>
+                    </div>
+
+                    <div class="action-section">
+                        <div class="action-title">
+                            <i class="fa-solid fa-gavel"></i> Xét duyệt đề tài
+                        </div>
+
+                        <div class="current-status">
+                            <span class="status-label">Trạng thái hiện tại:</span>
+                            <div id="statusDisplay" class="status-value status-waiting">Đang chờ duyệt</div>
+                        </div>
+
+                        <div class="feedback-area">
+                            <label style="font-weight: 600; font-size: 13px; margin-bottom: 5px; display:block;">
+                                Nhận xét của BCN Khoa:
+                            </label>
+                            <textarea id="adminComment" class="feedback-input" placeholder="Nhập nhận xét (Bắt buộc nếu từ chối)..."></textarea>
+                            <div id="feedbackError" class="feedback-required-msg">
+                                <i class="fa-solid fa-circle-exclamation"></i> Vui lòng nhập lý do từ chối!
+                            </div>
+                        </div>
+
+                        <div class="btn-row">
+                            <button class="btn-action btn-reject" id="btnReject">
+                                <i class="fa-solid fa-xmark"></i> Từ chối
+                            </button>
+                            <button class="btn-action btn-approve" id="btnApprove">
+                                <i class="fa-solid fa-check"></i> Duyệt
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // MOCK DATA
+            const projectData = {
+                name: "Kiến trúc Học sâu lai cho phân đoạn khối u não trên ảnh MRI đa phương thức với Bộ dữ liệu BraTS",
+                student: "Trương Quốc Duy (2174802010297)",
+                supervisor: "Ngô Thị Tuyết Như",
+                goal: "Xây dựng mô hình AI có khả năng phân đoạn khối u não với độ chính xác cao trên 90% Dice Score.",
+                tech: "Python, PyTorch, U-Net, Transformer, Docker",
+                result: "Mô hình đã huấn luyện, Web App Demo, Bài báo khoa học.",
+                requirement: "Sử dụng kiến trúc lai giữa CNN và Transformer để tối ưu hóa việc trích xuất đặc trưng toàn cục và cục bộ.",
+                status: "Đang chờ duyệt",
+                comment: ""
+            };
+
+            // FILL DATA
+            document.getElementById('dtName').value = projectData.name;
+            document.getElementById('dtStudent').value = projectData.student;
+            document.getElementById('dtSupervisor').value = projectData.supervisor;
+            document.getElementById('dtGoal').value = projectData.goal;
+            document.getElementById('dtTech').value = projectData.tech;
+            document.getElementById('dtResult').value = projectData.result;
+            document.getElementById('dtRequirement').value = projectData.requirement;
+            
+            updateStatusUI(projectData.status);
+
+            const btnApprove = document.getElementById('btnApprove');
+            const btnReject = document.getElementById('btnReject');
+            const adminComment = document.getElementById('adminComment');
+            const feedbackError = document.getElementById('feedbackError');
+
+            btnApprove.addEventListener('click', () => {
+                if(confirm("Bạn có chắc chắn muốn DUYỆT đề tài này không?")) {
+                    feedbackError.style.display = 'none';
+                    updateStatusUI("Đã duyệt");
+                    alert("Đã duyệt đề tài thành công!");
+                }
+            });
+
+            btnReject.addEventListener('click', () => {
+                const comment = adminComment.value.trim();
+                if (comment === "") {
+                    feedbackError.style.display = 'block';
+                    adminComment.focus();
+                    adminComment.style.borderColor = "#dc3545";
+                } else {
+                    feedbackError.style.display = 'none';
+                    adminComment.style.borderColor = "#ddd";
+                    if(confirm("Xác nhận TỪ CHỐI đề tài này?")) {
+                        updateStatusUI("Từ chối");
+                        alert("Đã từ chối đề tài!");
+                    }
+                }
+            });
+            
+            adminComment.addEventListener('input', () => {
+                if(adminComment.value.trim() !== "") {
+                    feedbackError.style.display = 'none';
+                    adminComment.style.borderColor = "#ddd";
+                }
+            });
+
+            function updateStatusUI(status) {
+                const statusDisplay = document.getElementById('statusDisplay');
+                statusDisplay.textContent = status;
+                statusDisplay.className = 'status-value';
+
+                if (status === 'Đã duyệt') {
+                    statusDisplay.classList.add('status-approved');
+                    statusDisplay.style.color = '#059669';
+                } else if (status === 'Từ chối') {
+                    statusDisplay.classList.add('status-rejected');
+                    statusDisplay.style.color = '#dc3545';
+                } else {
+                    statusDisplay.classList.add('status-waiting');
+                    statusDisplay.style.color = '#b45309';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

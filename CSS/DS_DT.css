@@ -1,0 +1,95 @@
+.filter-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px; 
+    margin-bottom: 20px;
+    width: 100%; /* THÊM: Chiếm hết chiều rộng để có chỗ đẩy ô tìm kiếm */
+}
+
+.filter-item, 
+.toolbar-left > div {           
+    display: flex;              
+    flex-direction: row;        /* QUAN TRỌNG: Sửa thành row để nằm ngang */
+    align-items: center;        
+    gap: 10px;                  
+}
+
+/* Đoạn này của bạn cũ là flex-direction: column (dọc), tôi đã sửa đè lại bên dưới */
+.filter-item {
+    display: flex;
+    /* flex-direction: column; */ /* BÁO CÁO: Tôi đã comment dòng này vì nó làm vỡ giao diện ngang */
+    flex-direction: row;          /* THAY THẾ: Chuyển thành row để Label nằm bên trái Input */
+    gap: 10px;                    /* Chỉnh lại khoảng cách cho đẹp hơn */
+}
+
+.filter-item label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap; /* THÊM: Giữ cho chữ không bị xuống dòng */
+    margin-bottom: 0;    /* THÊM: Xóa khoảng cách dưới mặc định của label */
+}
+
+.filter-item input, 
+.filter-item select,
+.toolbar-left select {   /* Áp dụng thêm cho select của Học kỳ */
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    width: 220px;
+    height: 38px;
+    outline: none; /* Chuyển outline xuống đây cho gọn */
+}
+
+.filter-item input:focus,
+.filter-item select:focus,
+.toolbar-left select:focus {
+    border-color: #D71920; /* Dùng mã màu cứng hoặc var(--primary-red) */
+}
+
+/* THÊM: Đẩy ô tìm kiếm (phần tử cuối cùng) sang sát lề phải */
+.filter-wrapper .filter-item:last-child {
+    margin-left: auto;
+}
+
+/* --- 2. TÙY CHỈNH BẢNG (TABLE) --- */
+
+col-topic-name {
+    min-width: 300px;
+    max-width: 450px;
+    white-space: normal;
+    line-height: 1.5;
+    text-align: left;
+}
+
+
+.col-id { min-width: 100px; font-weight: 600; text-align: left; }
+
+.text-center {
+    text-align: center !important;
+}
+
+
+.status-waiting { 
+    color: #d97706; 
+    font-weight: 500;
+}
+
+.status-approved {
+    color: #059669; 
+    font-weight: 500;
+}
+
+.status-rejected {
+    color: #333; 
+    font-weight: 400;
+}
+
+/* Link chi tiết */
+.link-detail { color: #333; text-decoration: underline; font-size: 13px; cursor: pointer; }
+.link-detail:hover { color: var(--primary-red); }
+
+
+
+

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Học kì - VLU</title>
+    
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .btn-purple {
+            background-color: #8A2BE2;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-purple:hover { background-color: #7b27cc; }
+        
+        .action-btn i { font-size: 16px; }
+        .btn-edit-icon { color: #007bff; } 
+        .btn-delete-icon { color: #dc3545; } 
+
+        /* Modal styling */
+        .modal-header { border-bottom: none; padding-bottom: 0; }
+        .modal-title { font-size: 18px; color: #333; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/img/82cb2669b39c7ae0fe1d18507ed7c609168a2ad3.png" alt="Logo VLU">
+            </div>
+            <ul class="menu">
+
+                <li class="menu-item">
+                    <div class="menu-link active-parent"> <span><i class="fa-solid fa-layer-group"></i> Đợt đồ án</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu open"> <li><a href="index.html" class="active-sub">Quản lý đợt đồ án</a></li>
+                        <li><a href="DS_DK.html">Danh sách đăng ký</a></li>
+                        <li><a href="DS_DT.html">Danh sách đề tài</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-users"></i> Hội đồng</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="HD_DT.html">Duyệt đề tài</a></li>
+                        <li><a href="HD_BC.html">Báo cáo hội đồng</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-list"></i> Danh mục</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="QL_Nganh.html">Ngành</a></li>
+                        <li><a href="QL_BoMon.html" class="active-sub">Bộ môn</a></li> 
+                        <li><a href="QL_ChuyenNganh.html">Chuyên ngành</a></li>
+                        <li><a href="QL_HocKi.html">Học kì</a></li>
+                        <li><a href="QL_Khoa.html">Khóa</a></li>
+                        <li><a href="QL_CT.html">Chương trình</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="QL_NguoiDung.html" class="menu-link">
+                        <span><i class="fa-solid fa-user-gear"></i> Người dùng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="CH_MAIL.html" class="menu-link">
+                        <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="BCTK.html" class="menu-link">
+                        <span><i class="fa-solid fa-chart-pie"></i> Báo cáo và thống kê</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="uni-name">TRƯỜNG ĐẠI HỌC VĂN LANG</div>
+
+                <div class="header-right-group">
+        
+                <div class="notification-container" id="notifDropdownBtn">
+                    <div class="bell-icon-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge">3</span> </div>
+                    
+                    <div class="notif-dropdown-menu" id="notifDropdown">
+                        <div class="notif-header">
+                            <span>Thông báo</span>
+                            <a href="#" class="mark-read">Đánh dấu đã đọc</a>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Nhắc nhở mở đợt đăng ký</p>
+                                    <p class="n-time">Vừa xong</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Hội đồng KTPM 01 đã được duyệt</p>
+                                    <p class="n-time">1 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Sinh viên nộp báo cáo tiến độ</p>
+                                    <p class="n-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown-container" id="userDropdown">
+                    <div class="user-profile">
+                        <div class="user-info-text">
+                            <span class="user-name">Admin 2174802010297</span>
+                            <span class="user-role">BCN Khoa</span>
+                        </div>
+                        <i class="fa-regular fa-circle-user user-avatar-icon"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-id-badge"></i> Hồ sơ cá nhân
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item logout-item">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="content-card">
+                    <h2 class="page-title" style="margin-bottom: 20px;">Quản lý học kì</h2>
+                    
+                    <div class="toolbar-row" style="justify-content: flex-end; gap: 15px;">
+                        <div style="display:flex; align-items:center; gap:5px;">
+                            <span class="filter-label">Tìm kiếm:</span>
+                            <input type="text" class="toolbar-input" id="searchInput" placeholder="Nhập tìm kiếm..." style="width: 200px;">
+                        </div>
+                        <button class="btn btn-purple" id="btnOpenAddModal">
+                            <i class="fa-solid fa-plus"></i> Thêm học kì
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="tableHocKi">
+                            <thead>
+                                <tr>
+                                    <th>Học kì</th>
+                                    <th>Năm bắt đầu</th>
+                                    <th>Năm kết thúc</th>
+                                    <th>Tuần bắt đầu</th>
+                                    <th>Ngày bắt đầu</th>
+                                    <th>Trạng thái</th>
+                                    <th style="text-align: center;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>01</td>
+                                    <td>2024</td>
+                                    <td>2025</td>
+                                    <td>5</td>
+                                    <td>11/27/2025</td>
+                                    <td>Đang diễn ra</td>
+                                    <td style="text-align: center;">
+                                        <button class="action-btn btn-edit-icon" title="Sửa"><i class="fa-regular fa-pen-to-square"></i></button>
+                                        <button class="action-btn btn-delete-icon" title="Xóa" onclick="deleteRow(this)"><i class="fa-solid fa-xmark"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="hocKiModal">
+        <div class="modal-dialog" style="width: 500px;">
+            <div class="modal-header">
+                <div class="modal-title">Thêm học kì mới</div>
+                <button class="btn-close close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Tên học kì:</label>
+                    <select id="inputTenHK" class="form-control">
+                        <option value="01">Học kì 1 (01)</option>
+                        <option value="02">Học kì 2 (02)</option>
+                        <option value="03">Học kì 3 (03)</option>
+                    </select>
+                </div>
+                
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Năm bắt đầu:</label>
+                        <input type="number" id="inputNamBatDau" class="form-control" placeholder="2024">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Năm kết thúc:</label>
+                        <input type="number" id="inputNamKetThuc" class="form-control" placeholder="2025">
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Tuần bắt đầu:</label>
+                        <input type="number" id="inputTuanBatDau" class="form-control" placeholder="Ví dụ: 5">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Ngày bắt đầu:</label>
+                        <input type="date" id="inputNgayBatDau" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: none; padding-top: 0;">
+                <button class="btn btn-secondary close-modal" style="min-width: 80px;">Hủy</button>
+                <button class="btn btn-purple" id="btnSaveHK" style="min-width: 80px; justify-content: center;">Lưu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('hocKiModal');
+            const btnOpen = document.getElementById('btnOpenAddModal');
+            const btnCloseList = document.querySelectorAll('.close-modal');
+            const btnSave = document.getElementById('btnSaveHK');
+            const tableBody = document.querySelector('#tableHocKi tbody');
+
+            // 1. Mở Modal
+            btnOpen.addEventListener('click', () => {
+                // Reset form
+                document.getElementById('inputNamBatDau').value = '';
+                document.getElementById('inputNamKetThuc').value = '';
+                document.getElementById('inputTuanBatDau').value = '';
+                document.getElementById('inputNgayBatDau').value = '';
+                modal.style.display = 'flex';
+            });
+
+            // 2. Đóng Modal
+            btnCloseList.forEach(btn => btn.addEventListener('click', () => modal.style.display = 'none'));
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) modal.style.display = 'none';
+            });
+
+            // 3. Chức năng Lưu
+            btnSave.addEventListener('click', () => {
+                const hk = document.getElementById('inputTenHK').value;
+                const namBD = document.getElementById('inputNamBatDau').value;
+                const namKT = document.getElementById('inputNamKetThuc').value;
+                const tuan = document.getElementById('inputTuanBatDau').value;
+                const ngay = document.getElementById('inputNgayBatDau').value; // YYYY-MM-DD
+
+                if (!namBD || !namKT || !tuan || !ngay) {
+                    alert("Vui lòng nhập đầy đủ thông tin!");
+                    return;
+                }
+
+                // Format lại ngày hiển thị (MM/DD/YYYY)
+                const dateObj = new Date(ngay);
+                const formattedDate = dateObj.toLocaleDateString('en-US');
+
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${hk}</td>
+                    <td>${namBD}</td>
+                    <td>${namKT}</td>
+                    <td>${tuan}</td>
+                    <td>${formattedDate}</td>
+                    <td>Sắp diễn ra</td>
+                    <td style="text-align: center;">
+                        <button class="action-btn btn-edit-icon" title="Sửa"><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button class="action-btn btn-delete-icon" title="Xóa" onclick="deleteRow(this)"><i class="fa-solid fa-xmark"></i></button>
+                    </td>
+                `;
+
+                tableBody.appendChild(newRow);
+                modal.style.display = 'none';
+            });
+
+            // 4. Tìm kiếm
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const keyword = this.value.toLowerCase();
+                const rows = tableBody.querySelectorAll('tr');
+                
+                rows.forEach(row => {
+                    const text = row.innerText.toLowerCase();
+                    row.style.display = text.includes(keyword) ? '' : 'none';
+                });
+            });
+        });
+
+        // Hàm xóa dòng
+        function deleteRow(btn) {
+            if(confirm("Bạn có chắc chắn muốn xóa học kì này không?")) {
+                const row = btn.closest('tr');
+                row.remove();
+            }
+        }
+    </script>
+</body>
+</html>

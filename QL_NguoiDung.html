@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Đợt đồ án - VLU</title>
+    <link rel="stylesheet" href="/CSS/index.css">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .btn-purple {
+            background-color: #8A2BE2; color: white; border: none; padding: 8px 16px;
+            border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .btn-purple:hover { background-color: #7b27cc; }
+
+        .stats-container {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 25px;
+        }
+        .stat-card {
+            background: white; border-radius: 8px; padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05); border: 1px solid #eee;
+            display: flex; align-items: center; justify-content: space-between;
+            transition: transform 0.2s; cursor: pointer;
+        }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .stat-info h3 { margin: 0; font-size: 24px; font-weight: 700; color: #333; }
+        .stat-info p { margin: 5px 0 0; font-size: 12px; color: #666; font-weight: 600; text-transform: uppercase; }
+        .stat-icon { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+
+        .bg-sv { background-color: #e3f2fd; color: #1976d2; }
+        .bg-gv { background-color: #e8f5e9; color: #2e7d32; }
+        .bg-bcn { background-color: #fff3e0; color: #f57c00; }
+        .bg-bm { background-color: #f3e5f5; color: #7b1fa2; }
+        .bg-none { background-color: #ffebee; color: #c62828; }
+
+        .role-badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .role-sv { background: #e3f2fd; color: #1565c0; }
+        .role-gv { background: #e8f5e9; color: #2e7d32; }
+        .role-bcn { background: #fff3e0; color: #ef6c00; }
+        .role-bm { background: #f3e5f5; color: #6a1b9a; }
+        .role-none { background: #ffebee; color: #c62828; border: 1px dashed #ef5350; }
+
+        .switch {
+            position: relative; display: inline-block; width: 40px; height: 20px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc; transition: .4s; border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute; content: "";
+            height: 16px; width: 16px; left: 2px; bottom: 2px;
+            background-color: white; transition: .4s; border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: #28a745; }
+        input:checked + .slider:before { transform: translateX(20px); }
+        
+        /* Tooltip trạng thái */
+        .slider:hover::after {
+            content: attr(title); /* Hiện tooltip */
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/img/82cb2669b39c7ae0fe1d18507ed7c609168a2ad3.png" alt="Logo VLU">
+            </div>
+            <ul class="menu">
+
+                <li class="menu-item">
+                    <div class="menu-link active-parent"> <span><i class="fa-solid fa-layer-group"></i> Đợt đồ án</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu open"> <li><a href="index.html" class="active-sub">Quản lý đợt đồ án</a></li>
+                        <li><a href="DS_DK.html">Danh sách đăng ký</a></li>
+                        <li><a href="DS_DT.html">Danh sách đề tài</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-users"></i> Hội đồng</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="HD_DT.html">Duyệt đề tài</a></li>
+                        <li><a href="HD_BC.html">Báo cáo hội đồng</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-list"></i> Danh mục</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="QL_Nganh.html">Ngành</a></li>
+                        <li><a href="QL_BoMon.html" class="active-sub">Bộ môn</a></li> 
+                        <li><a href="QL_ChuyenNganh.html">Chuyên ngành</a></li>
+                        <li><a href="QL_HocKi.html">Học kì</a></li>
+                        <li><a href="QL_Khoa.html">Khóa</a></li>
+                        <li><a href="QL_CT.html">Chương trình</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="QL_NguoiDung.html" class="menu-link">
+                        <span><i class="fa-solid fa-user-gear"></i> Người dùng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="CH_MAIL.html" class="menu-link">
+                        <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="BCTK.html" class="menu-link">
+                        <span><i class="fa-solid fa-chart-pie"></i> Báo cáo và thống kê</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="uni-name">TRƯỜNG ĐẠI HỌC VĂN LANG</div>
+
+                <div class="header-right-group">
+        
+                <div class="notification-container" id="notifDropdownBtn">
+                    <div class="bell-icon-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge">3</span> </div>
+                    
+                    <div class="notif-dropdown-menu" id="notifDropdown">
+                        <div class="notif-header">
+                            <span>Thông báo</span>
+                            <a href="#" class="mark-read">Đánh dấu đã đọc</a>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Nhắc nhở mở đợt đăng ký</p>
+                                    <p class="n-time">Vừa xong</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Hội đồng KTPM 01 đã được duyệt</p>
+                                    <p class="n-time">1 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Sinh viên nộp báo cáo tiến độ</p>
+                                    <p class="n-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown-container" id="userDropdown">
+                    <div class="user-profile">
+                        <div class="user-info-text">
+                            <span class="user-name">Admin 2174802010297</span>
+                            <span class="user-role">BCN Khoa</span>
+                        </div>
+                        <i class="fa-regular fa-circle-user user-avatar-icon"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-id-badge"></i> Hồ sơ cá nhân
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item logout-item">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="content-card">
+                    <h2 class="page-title" style="margin-bottom: 20px;">Quản lý người dùng</h2>
+                    
+                    <div class="stats-container">
+                        <div class="stat-card" onclick="filterByCard('Sinh viên')">
+                            <div class="stat-info"><h3 id="countSV">0</h3><p>Sinh viên</p></div>
+                            <div class="stat-icon bg-sv"><i class="fa-solid fa-graduation-cap"></i></div>
+                        </div>
+                        <div class="stat-card" onclick="filterByCard('Giảng viên')">
+                            <div class="stat-info"><h3 id="countGV">0</h3><p>Giảng viên</p></div>
+                            <div class="stat-icon bg-gv"><i class="fa-solid fa-chalkboard-user"></i></div>
+                        </div>
+                        <div class="stat-card" onclick="filterByCard('BCN Khoa')">
+                            <div class="stat-info"><h3 id="countBCN">0</h3><p>BCN Khoa</p></div>
+                            <div class="stat-icon bg-bcn"><i class="fa-solid fa-user-tie"></i></div>
+                        </div>
+                        <div class="stat-card" onclick="filterByCard('Bộ môn')">
+                            <div class="stat-info"><h3 id="countBM">0</h3><p>Bộ môn</p></div>
+                            <div class="stat-icon bg-bm"><i class="fa-solid fa-building-user"></i></div>
+                        </div>
+                        <div class="stat-card" onclick="filterByCard('Chưa phân quyền')">
+                            <div class="stat-info"><h3 id="countNone">0</h3><p>Chưa phân quyền</p></div>
+                            <div class="stat-icon bg-none"><i class="fa-solid fa-user-lock"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="toolbar-row" style="justify-content: space-between;">
+                        <div style="display:flex; gap: 15px; align-items:center;">
+                            <div style="display:flex; align-items:center; gap:5px;">
+                                <span class="filter-label">Vai trò:</span>
+                                <select class="form-control" id="roleFilter" style="width: 180px;">
+                                    <option value="all">Tất cả</option>
+                                    <option value="Sinh viên">Sinh viên</option>
+                                    <option value="Giảng viên">Giảng viên</option>
+                                    <option value="BCN Khoa">BCN Khoa</option>
+                                    <option value="Bộ môn">Bộ môn</option>
+                                    <option value="Chưa phân quyền">Chưa phân quyền</option>
+                                </select>
+                            </div>
+                            <input type="text" id="searchInput" class="toolbar-input" placeholder="Tìm tên, email, mã số..." style="width: 250px;">
+                        </div>
+                        <button class="btn btn-purple" onclick="alert('Mở modal thêm người dùng...')">
+                            <i class="fa-solid fa-plus"></i> Thêm người dùng
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="userTable">
+                            <thead>
+                                <tr>
+                                    <th>MSSV / MSGV</th>
+                                    <th>Họ và tên</th>
+                                    <th>Email</th>
+                                    <th>Vai trò</th>
+                                    <th>Học vị</th>
+                                    <th style="text-align:center;">Trạng thái</th> <th style="text-align: center;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <div class="modal-overlay" id="addUserModal">
+        <div class="modal-dialog" style="width: 500px;">
+            <div class="modal-header">
+                <div class="modal-title">Thêm người dùng mới</div>
+                <button class="btn-close close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Mã số (MSSV/MSGV):</label>
+                    <input type="text" id="newId" class="form-control" placeholder="Nhập mã số">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Họ và tên:</label>
+                    <input type="text" id="newName" class="form-control" placeholder="Nhập họ tên">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Email Văn Lang:</label>
+                    <input type="email" id="newEmail" class="form-control" placeholder="example@vanlanguni.vn">
+                </div>
+                
+                <div style="display: flex; gap: 15px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Vai trò:</label>
+                        <select id="newRole" class="form-control">
+                            <option value="Sinh viên">Sinh viên</option>
+                            <option value="Giảng viên">Giảng viên</option>
+                            <option value="Bộ môn">Bộ môn</option>
+                            <option value="BCN Khoa">BCN Khoa</option>
+                            <option value="Chưa phân quyền">Chưa phân quyền</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Học vị:</label>
+                        <select id="newDegree" class="form-control" disabled style="background-color: #f5f5f5;">
+                            <option value="">-- Trống --</option>
+                            <option value="Cử nhân">Cử nhân</option>
+                            <option value="Thạc sĩ">Thạc sĩ</option>
+                            <option value="Tiến sĩ">Tiến sĩ</option>
+                            <option value="Phó giáo sư">Phó giáo sư</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: none; padding-top: 0;">
+                <button class="btn btn-secondary close-modal" style="min-width: 80px;">Hủy</button>
+                <button class="btn btn-purple" id="btnSaveUser" style="min-width: 80px; justify-content: center;">Lưu</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="script.js"></script>
+    <script>
+        // --- KHAI BÁO DỮ LIỆU GLOBAL ĐỂ HÀM TOGGLE GỌI ĐƯỢC ---
+        let usersDB = [
+            { id: "2174802010297", name: "Trương Quốc Duy", email: "duy.2174802010297@vanlanguni.vn", role: "Sinh viên", degree: "", status: "active" },
+            { id: "GV001", name: "Ngô Thị Tuyết Như", email: "nhu.ngo@vanlanguni.vn", role: "Giảng viên", degree: "Thạc sĩ", status: "active" },
+            { id: "GV002", name: "Nguyễn Văn A", email: "a.nguyen@vanlanguni.vn", role: "BCN Khoa", degree: "Tiến sĩ", status: "active" },
+            { id: "user_lock", name: "Lê Văn Khóa", email: "khoa.le@vanlanguni.vn", role: "Sinh viên", degree: "", status: "inactive" }, // Test user bị khóa
+            { id: "user_new", name: "Lê Văn Mới", email: "moi.le@vanlanguni.vn", role: "Chưa phân quyền", degree: "Cử nhân", status: "inactive" }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tableBody = document.querySelector('#userTable tbody');
+            const roleFilter = document.getElementById('roleFilter');
+            const searchInput = document.getElementById('searchInput');
+
+            // --- HÀM RENDER BẢNG (CÓ NÚT SWITCH) ---
+            window.renderTable = function(data) {
+                tableBody.innerHTML = '';
+                
+                data.forEach(u => {
+                    // Logic ẩn học vị
+                    let displayDegree = u.degree;
+                    if (u.role === 'Sinh viên' || u.role === 'Chưa phân quyền') displayDegree = ''; 
+
+                    // Class badge cho role
+                    let badgeClass = '';
+                    switch(u.role) {
+                        case 'Sinh viên': badgeClass = 'role-sv'; break;
+                        case 'Giảng viên': badgeClass = 'role-gv'; break;
+                        case 'BCN Khoa': badgeClass = 'role-bcn'; break;
+                        case 'Bộ môn': badgeClass = 'role-bm'; break;
+                        default: badgeClass = 'role-none'; break;
+                    }
+
+                    // Logic Nút Switch (Checked nếu status là active)
+                    const isChecked = u.status === 'active' ? 'checked' : '';
+                    const statusTitle = u.status === 'active' ? 'Đang hoạt động' : 'Đang khóa';
+
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${u.id}</td>
+                        <td style="font-weight: 500;">${u.name}</td>
+                        <td>${u.email}</td>
+                        <td><span class="role-badge ${badgeClass}">${u.role}</span></td>
+                        <td>${displayDegree}</td>
+                        <td style="text-align:center;">
+                            <label class="switch" title="${statusTitle}">
+                                <input type="checkbox" ${isChecked} onchange="toggleUserStatus('${u.id}', this)">
+                                <span class="slider"></span>
+                            </label>
+                        </td>
+                        <td style="text-align: center;">
+                            <button class="action-btn btn-edit-icon"><i class="fa-regular fa-pen-to-square"></i></button>
+                            <button class="action-btn btn-delete-icon"><i class="fa-solid fa-trash"></i></button>
+                        </td>
+                    `;
+                    tableBody.appendChild(tr);
+                });
+            }
+
+            // --- HÀM CẬP NHẬT THỐNG KÊ ---
+            window.updateStats = function() {
+                const counts = { 'Sinh viên': 0, 'Giảng viên': 0, 'BCN Khoa': 0, 'Bộ môn': 0, 'Chưa phân quyền': 0 };
+                usersDB.forEach(u => { if (counts[u.role] !== undefined) counts[u.role]++; });
+
+                document.getElementById('countSV').innerText = counts['Sinh viên'];
+                document.getElementById('countGV').innerText = counts['Giảng viên'];
+                document.getElementById('countBCN').innerText = counts['BCN Khoa'];
+                document.getElementById('countBM').innerText = counts['Bộ môn'];
+                document.getElementById('countNone').innerText = counts['Chưa phân quyền'];
+            }
+
+            // --- LOGIC LỌC ---
+            function filterData() {
+                const role = roleFilter.value;
+                const keyword = searchInput.value.toLowerCase();
+                const filtered = usersDB.filter(u => {
+                    const matchRole = (role === 'all') || (u.role === role);
+                    const matchSearch = u.name.toLowerCase().includes(keyword) || u.id.toLowerCase().includes(keyword) || u.email.toLowerCase().includes(keyword);
+                    return matchRole && matchSearch;
+                });
+                renderTable(filtered);
+            }
+
+            // Hàm hỗ trợ lọc từ Card
+            window.filterByCard = function(roleName) {
+                roleFilter.value = roleName;
+                filterData();
+            };
+
+            // Init Events
+            roleFilter.addEventListener('change', filterData);
+            searchInput.addEventListener('input', filterData);
+            
+            // Init Data
+            updateStats();
+            renderTable(usersDB);
+        });
+
+        // --- HÀM XỬ LÝ BẬT/TẮT TRẠNG THÁI (GLOBAL) ---
+        function toggleUserStatus(userId, checkbox) {
+            // Tìm user trong DB
+            const user = usersDB.find(u => u.id === userId);
+            
+            if (user) {
+                // Cập nhật trạng thái mới
+                user.status = checkbox.checked ? 'active' : 'inactive';
+                
+                // Hiển thị thông báo (Giả lập)
+                const statusText = user.status === 'active' ? 'ĐÃ MỞ KHÓA' : 'ĐÃ KHÓA';
+                console.log(`User ${user.name} (ID: ${userId}) -> ${statusText}`);
+                
+                // Cập nhật lại title tooltip cho slider (để người dùng rê chuột vào thấy đổi)
+                const label = checkbox.closest('.switch');
+                if(label) label.setAttribute('title', user.status === 'active' ? 'Đang hoạt động' : 'Đang khóa');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Khung đào tạo - VLU</title>
+    
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .detail-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px;
+        }
+        .program-info { font-size: 14px; color: #555; margin-bottom: 5px; }
+        .badge-type { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+        .badge-compulsory { background: #ffebee; color: #c62828; border: 1px solid #ffcdd2; } /* Bắt buộc - Đỏ nhạt */
+        .badge-elective { background: #e3f2fd; color: #1565c0; border: 1px solid #bbdefb; } /* Tự chọn - Xanh nhạt */
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/img/82cb2669b39c7ae0fe1d18507ed7c609168a2ad3.png" alt="Logo VLU">
+            </div>
+            <ul class="menu">
+
+                <li class="menu-item">
+                    <div class="menu-link active-parent"> <span><i class="fa-solid fa-layer-group"></i> Đợt đồ án</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu open"> <li><a href="index.html" class="active-sub">Quản lý đợt đồ án</a></li>
+                        <li><a href="DS_DK.html">Danh sách đăng ký</a></li>
+                        <li><a href="DS_DT.html">Danh sách đề tài</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-users"></i> Hội đồng</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="HD_DT.html">Duyệt đề tài</a></li>
+                        <li><a href="HD_BC.html">Báo cáo hội đồng</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-list"></i> Danh mục</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="QL_Nganh.html">Ngành</a></li>
+                        <li><a href="QL_BoMon.html" class="active-sub">Bộ môn</a></li> 
+                        <li><a href="QL_ChuyenNganh.html">Chuyên ngành</a></li>
+                        <li><a href="QL_HocKi.html">Học kì</a></li>
+                        <li><a href="QL_Khoa.html">Khóa</a></li>
+                        <li><a href="QL_CT.html">Chương trình</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="QL_NguoiDung.html" class="menu-link">
+                        <span><i class="fa-solid fa-user-gear"></i> Người dùng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="CH_MAIL.html" class="menu-link">
+                        <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="BCTK.html" class="menu-link">
+                        <span><i class="fa-solid fa-chart-pie"></i> Báo cáo và thống kê</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="uni-name">TRƯỜNG ĐẠI HỌC VĂN LANG</div>
+
+                <div class="header-right-group">
+        
+                <div class="notification-container" id="notifDropdownBtn">
+                    <div class="bell-icon-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge">3</span> </div>
+                    
+                    <div class="notif-dropdown-menu" id="notifDropdown">
+                        <div class="notif-header">
+                            <span>Thông báo</span>
+                            <a href="#" class="mark-read">Đánh dấu đã đọc</a>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Nhắc nhở mở đợt đăng ký</p>
+                                    <p class="n-time">Vừa xong</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Hội đồng KTPM 01 đã được duyệt</p>
+                                    <p class="n-time">1 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Sinh viên nộp báo cáo tiến độ</p>
+                                    <p class="n-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown-container" id="userDropdown">
+                    <div class="user-profile">
+                        <div class="user-info-text">
+                            <span class="user-name">Admin 2174802010297</span>
+                            <span class="user-role">BCN Khoa</span>
+                        </div>
+                        <i class="fa-regular fa-circle-user user-avatar-icon"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-id-badge"></i> Hồ sơ cá nhân
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item logout-item">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="content-card">
+                    
+                    <div class="detail-header">
+                        <div>
+                            <h2 class="page-title">Chi tiết chương trình đào tạo</h2>
+                            <p class="program-info"><strong>Mã CT:</strong> CT_K27_CNTT | <strong>Tên:</strong> Khung CTĐT K27 CNTT</p>
+                            <p class="program-info"><strong>Khóa:</strong> K27 | <strong>Tổng tín chỉ:</strong> 145</p>
+                        </div>
+                        <a href="QL_CT.html" class="btn btn-secondary">
+                            <i class="fa-solid fa-arrow-left"></i> Quay lại danh sách
+                        </a>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="tableSubject">
+                            <thead>
+                                <tr style="background-color: #f8f9fa;">
+                                    <th>STT</th>
+                                    <th>Mã Học Phần</th>
+                                    <th>Tên Học Phần</th>
+                                    <th style="text-align: center;">Số TC</th>
+                                    <th style="text-align: center;">Loại HP</th>
+                                    <th>ĐK Tiên Quyết</th>
+                                    <th style="text-align: center;">HK Tổ Chức</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background-color: #fafafa; font-weight:bold;"><td colspan="7">Học kì 1</td></tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>71ITBS1013</td>
+                                    <td>Nhập môn lập trình</td>
+                                    <td style="text-align: center;">3</td>
+                                    <td style="text-align: center;"><span class="badge-type badge-compulsory">Bắt buộc</span></td>
+                                    <td></td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>71ITBS1023</td>
+                                    <td>Kiến trúc máy tính</td>
+                                    <td style="text-align: center;">3</td>
+                                    <td style="text-align: center;"><span class="badge-type badge-compulsory">Bắt buộc</span></td>
+                                    <td></td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>71MATH1033</td>
+                                    <td>Đại số tuyến tính</td>
+                                    <td style="text-align: center;">3</td>
+                                    <td style="text-align: center;"><span class="badge-type badge-compulsory">Bắt buộc</span></td>
+                                    <td></td>
+                                    <td style="text-align: center;">1</td>
+                                </tr>
+
+                                <tr style="background-color: #fafafa; font-weight:bold;"><td colspan="7">Học kì 2</td></tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>71ITBS1043</td>
+                                    <td>Kỹ thuật lập trình</td>
+                                    <td style="text-align: center;">3</td>
+                                    <td style="text-align: center;"><span class="badge-type badge-compulsory">Bắt buộc</span></td>
+                                    <td>71ITBS1013 (a)</td> <td style="text-align: center;">2</td>
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>71ITBS1053</td>
+                                    <td>Toán rời rạc</td>
+                                    <td style="text-align: center;">3</td>
+                                    <td style="text-align: center;"><span class="badge-type badge-compulsory">Bắt buộc</span></td>
+                                    <td></td>
+                                    <td style="text-align: center;">2</td>
+                                </tr>
+
+                                <tr style="background-color: #fafafa; font-weight:bold;"><td colspan="7">Học kì 3</td></tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>71ITBS2013</td>
+                                    <td>Cấu trúc dữ liệu và giải thuật</td>
+                                    <td style="text-align: center;">3</td>
+                                    <td style="text-align: center;"><span class="badge-type badge-compulsory">Bắt buộc</span></td>
+                                    <td>71ITBS1043 (a)</td>
+                                    <td style="text-align: center;">3</td>
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>71SOF2033</td>
+                                    <td>Chuyên đề công nghệ mới (Ví dụ tự chọn)</td>
+                                    <td style="text-align: center;">3</td>
+                                    <td style="text-align: center;"><span class="badge-type badge-elective">Tự chọn</span></td>
+                                    <td></td>
+                                    <td style="text-align: center;">3</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết Đợt đồ án</title>
+    <link rel="stylesheet" href="/CSS/edit.css">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/img/82cb2669b39c7ae0fe1d18507ed7c609168a2ad3.png" alt="Logo VLU">
+            </div>
+            <ul class="menu">
+
+                <li class="menu-item">
+                    <div class="menu-link active-parent"> <span><i class="fa-solid fa-layer-group"></i> Đợt đồ án</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu open"> <li><a href="index.html" class="active-sub">Quản lý đợt đồ án</a></li>
+                        <li><a href="DS_DK.html">Danh sách đăng ký</a></li>
+                        <li><a href="DS_DT.html">Danh sách đề tài</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-users"></i> Hội đồng</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="HD_DT.html">Duyệt đề tài</a></li>
+                        <li><a href="HD_BC.html">Báo cáo hội đồng</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-list"></i> Danh mục</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="QL_Nganh.html">Ngành</a></li>
+                        <li><a href="QL_BoMon.html" class="active-sub">Bộ môn</a></li> 
+                        <li><a href="QL_ChuyenNganh.html">Chuyên ngành</a></li>
+                        <li><a href="QL_HocKi.html">Học kì</a></li>
+                        <li><a href="QL_Khoa.html">Khóa</a></li>
+                        <li><a href="QL_CT.html">Chương trình</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="QL_NguoiDung.html" class="menu-link">
+                        <span><i class="fa-solid fa-user-gear"></i> Người dùng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="CH_MAIL.html" class="menu-link">
+                        <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="BCTK.html" class="menu-link">
+                        <span><i class="fa-solid fa-chart-pie"></i> Báo cáo và thống kê</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+           <header class="top-header">
+                <div class="uni-name">TRƯỜNG ĐẠI HỌC VĂN LANG</div>
+
+                <div class="header-right-group">
+        
+                <div class="notification-container" id="notifDropdownBtn">
+                    <div class="bell-icon-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge">3</span> </div>
+                    
+                    <div class="notif-dropdown-menu" id="notifDropdown">
+                        <div class="notif-header">
+                            <span>Thông báo</span>
+                            <a href="#" class="mark-read">Đánh dấu đã đọc</a>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Nhắc nhở mở đợt đăng ký</p>
+                                    <p class="n-time">Vừa xong</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Hội đồng KTPM 01 đã được duyệt</p>
+                                    <p class="n-time">1 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Sinh viên nộp báo cáo tiến độ</p>
+                                    <p class="n-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown-container" id="userDropdown">
+                    <div class="user-profile">
+                        <div class="user-info-text">
+                            <span class="user-name">Admin 2174802010297</span>
+                            <span class="user-role">BCN Khoa</span>
+                        </div>
+                        <i class="fa-regular fa-circle-user user-avatar-icon"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-id-badge"></i> Hồ sơ cá nhân
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item logout-item">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="edit-container">
+                    <div class="page-header-row">
+                        <h2 class="page-title">Chi tiết đợt đồ án</h2>
+                        <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Quay lại danh sách</a>
+                    </div>
+
+                    <div style="margin-bottom: 30px;">
+                        <h4 style="color: var(--primary-red); margin-bottom: 15px;">Thông tin chung</h4>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label>Tên đợt:</label>
+                                <input type="text" id="eName" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Khóa:</label>
+                                <select id="eCohort" class="form-control">
+                                    <option value="K26">Khóa 26</option>
+                                    <option value="K27">Khóa 27</option>
+                                    <option value="K28">Khóa 28</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày bắt đầu đợt (Có thể sửa - Sẽ tính lại toàn bộ ngày bên dưới):</label>
+                            <input type="date" id="eMainStart" class="form-control" style="width: 250px;">
+                        </div>
+                    </div>
+
+                    <div class="phase-section">
+                        <div class="phase-header" onclick="togglePhase(this)">
+                            1. Giai đoạn chuẩn bị (3 Tuần)
+                            <i class="fa-solid fa-chevron-down"></i>  
+                        </div>
+                        <div class="phase-content">
+                            <div class="phase-sub-content">
+                                <div class="form-group" style="margin-bottom:10px;"><label>Đăng ký nguyện vọng:</label>
+                                    <div style="display:flex; gap:10px"><input type="date" id="dkStart" class="form-control edit-date-input"><input type="date" id="dkEnd" class="form-control edit-date-input"></div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:10px;"><label>Duyệt NV:</label>
+                                    <div style="display:flex; gap:10px"><input type="date" id="duyetNVStart" class="form-control edit-date-input"><input type="date" id="duyetNVEnd" class="form-control edit-date-input"></div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:10px;"><label>Đề xuất đề tài:</label>
+                                    <div style="display:flex; gap:10px"><input type="date" id="dxStart" class="form-control edit-date-input"><input type="date" id="dxEnd" class="form-control edit-date-input"></div>
+                                </div>
+                                <div class="form-group"><label>Duyệt đề tài:</label>
+                                    <div style="display:flex; gap:10px"><input type="date" id="duyetDTStart" class="form-control edit-date-input"><input type="date" id="duyetDTEnd" class="form-control edit-date-input"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="phase-section">
+                        <div class="phase-header" onclick="togglePhase(this)">
+                            2. Giai đoạn chính thức (13 Tuần)
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="phase-content">
+                             <div class="phase-sub-content">
+                                <div class="form-group"><label>Nộp đề cương:</label>
+                                    <div style="display:flex; gap:10px"><input type="date" id="deCuongStart" class="form-control edit-date-input"><input type="date" id="deCuongEnd" class="form-control edit-date-input"></div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div class="phase-section">
+                        <div class="phase-header" onclick="togglePhase(this)">
+                            3. Báo cáo cuối kỳ
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                        <div class="phase-content">
+                            <div class="form-grid">
+                                <div class="form-group"><label>Bắt đầu:</label><input type="date" id="reportStart" class="form-control edit-date-input"></div>
+                                <div class="form-group"><label>Hết hạn đợt:</label><input type="date" id="reportEnd" class="form-control edit-date-input" style="border-color:var(--primary-red)"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: right; margin-top: 30px;">
+                        <button class="btn btn-save" style="padding: 10px 30px;">LƯU THAY ĐỔI</button>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

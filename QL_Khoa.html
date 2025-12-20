@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Khóa đào tạo - VLU</title>
+    
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .btn-purple {
+            background-color: #8A2BE2;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-purple:hover { background-color: #7b27cc; }
+        
+        .action-btn i { font-size: 16px; }
+        .btn-edit-icon { color: #007bff; } 
+        .btn-delete-icon { color: #dc3545; } 
+
+        .modal-header { border-bottom: none; padding-bottom: 0; }
+        .modal-title { font-size: 18px; color: #333; font-weight: 600; }
+        
+        /* Badge trạng thái */
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        .status-active { background-color: #d1e7dd; color: #0f5132; } 
+        .status-finished { background-color: #e2e3e5; color: #41464b; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/img/82cb2669b39c7ae0fe1d18507ed7c609168a2ad3.png" alt="Logo VLU">
+            </div>
+            <ul class="menu">
+
+                <li class="menu-item">
+                    <div class="menu-link active-parent"> <span><i class="fa-solid fa-layer-group"></i> Đợt đồ án</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu open"> <li><a href="index.html" class="active-sub">Quản lý đợt đồ án</a></li>
+                        <li><a href="DS_DK.html">Danh sách đăng ký</a></li>
+                        <li><a href="DS_DT.html">Danh sách đề tài</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-users"></i> Hội đồng</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="HD_DT.html">Duyệt đề tài</a></li>
+                        <li><a href="HD_BC.html">Báo cáo hội đồng</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-list"></i> Danh mục</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="QL_Nganh.html">Ngành</a></li>
+                        <li><a href="QL_BoMon.html" class="active-sub">Bộ môn</a></li> 
+                        <li><a href="QL_ChuyenNganh.html">Chuyên ngành</a></li>
+                        <li><a href="QL_HocKi.html">Học kì</a></li>
+                        <li><a href="QL_Khoa.html">Khóa</a></li>
+                        <li><a href="QL_CT.html">Chương trình</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="QL_NguoiDung.html" class="menu-link">
+                        <span><i class="fa-solid fa-user-gear"></i> Người dùng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="CH_MAIL.html" class="menu-link">
+                        <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="BCTK.html" class="menu-link">
+                        <span><i class="fa-solid fa-chart-pie"></i> Báo cáo và thống kê</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="uni-name">TRƯỜNG ĐẠI HỌC VĂN LANG</div>
+
+                <div class="header-right-group">
+        
+                <div class="notification-container" id="notifDropdownBtn">
+                    <div class="bell-icon-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge">3</span> </div>
+                    
+                    <div class="notif-dropdown-menu" id="notifDropdown">
+                        <div class="notif-header">
+                            <span>Thông báo</span>
+                            <a href="#" class="mark-read">Đánh dấu đã đọc</a>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Nhắc nhở mở đợt đăng ký</p>
+                                    <p class="n-time">Vừa xong</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Hội đồng KTPM 01 đã được duyệt</p>
+                                    <p class="n-time">1 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Sinh viên nộp báo cáo tiến độ</p>
+                                    <p class="n-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown-container" id="userDropdown">
+                    <div class="user-profile">
+                        <div class="user-info-text">
+                            <span class="user-name">Admin 2174802010297</span>
+                            <span class="user-role">BCN Khoa</span>
+                        </div>
+                        <i class="fa-regular fa-circle-user user-avatar-icon"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-id-badge"></i> Hồ sơ cá nhân
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item logout-item">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="content-card">
+                    <h2 class="page-title" style="margin-bottom: 20px;">Quản lý khóa đào tạo</h2>
+                    
+                    <div class="toolbar-row" style="justify-content: flex-end; gap: 15px;">
+                        <div style="display:flex; align-items:center; gap:5px;">
+                            <span class="filter-label">Tìm kiếm:</span>
+                            <input type="text" class="toolbar-input" id="searchInput" placeholder="Nhập mã hoặc tên khóa..." style="width: 220px;">
+                        </div>
+                        <button class="btn btn-purple" id="btnOpenAddModal">
+                            <i class="fa-solid fa-plus"></i> Thêm khóa mới
+                        </button>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="tableKhoa">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">STT</th>
+                                    <th>Mã khóa</th>
+                                    <th>Tên khóa</th>
+                                    <th>Năm nhập học</th>
+                                    <th>Năm tốt nghiệp (DK)</th>
+                                    <th>Trạng thái</th>
+                                    <th style="text-align: center;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>01</td>
+                                    <td>K27</td>
+                                    <td>Khóa 27</td>
+                                    <td>2021</td>
+                                    <td>2025</td>
+                                    <td><span class="status-badge status-active">Đang đào tạo</span></td>
+                                    <td style="text-align: center;">
+                                        <button class="action-btn btn-edit-icon" title="Sửa"><i class="fa-regular fa-pen-to-square"></i></button>
+                                        <button class="action-btn btn-delete-icon" title="Xóa" onclick="deleteRow(this)"><i class="fa-solid fa-xmark"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>02</td>
+                                    <td>K26</td>
+                                    <td>Khóa 26</td>
+                                    <td>2020</td>
+                                    <td>2024</td>
+                                    <td><span class="status-badge status-active">Đang đào tạo</span></td>
+                                    <td style="text-align: center;">
+                                        <button class="action-btn btn-edit-icon" title="Sửa"><i class="fa-regular fa-pen-to-square"></i></button>
+                                        <button class="action-btn btn-delete-icon" title="Xóa" onclick="deleteRow(this)"><i class="fa-solid fa-xmark"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>03</td>
+                                    <td>K25</td>
+                                    <td>Khóa 25</td>
+                                    <td>2019</td>
+                                    <td>2023</td>
+                                    <td><span class="status-badge status-finished">Đã tốt nghiệp</span></td>
+                                    <td style="text-align: center;">
+                                        <button class="action-btn btn-edit-icon" title="Sửa"><i class="fa-regular fa-pen-to-square"></i></button>
+                                        <button class="action-btn btn-delete-icon" title="Xóa" onclick="deleteRow(this)"><i class="fa-solid fa-xmark"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="khoaModal">
+        <div class="modal-dialog" style="width: 500px;">
+            <div class="modal-header">
+                <div class="modal-title">Thông tin khóa đào tạo</div>
+                <button class="btn-close close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Mã khóa:</label>
+                    <input type="text" id="inputMaKhoa" class="form-control" placeholder="Ví dụ: K28">
+                </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Tên khóa:</label>
+                    <input type="text" id="inputTenKhoa" class="form-control" placeholder="Ví dụ: Khóa 28">
+                </div>
+                
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <div class="form-group" style="flex: 1;">
+                        <label>Năm nhập học:</label>
+                        <input type="number" id="inputNamBD" class="form-control" placeholder="2022">
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Năm tốt nghiệp (DK):</label>
+                        <input type="number" id="inputNamKT" class="form-control" placeholder="2026">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Trạng thái:</label>
+                    <select id="inputTrangThai" class="form-control">
+                        <option value="active">Đang đào tạo</option>
+                        <option value="finished">Đã tốt nghiệp</option>
+                        <option value="locked">Tạm khóa</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: none; padding-top: 0;">
+                <button class="btn btn-secondary close-modal" style="min-width: 80px;">Hủy</button>
+                <button class="btn btn-purple" id="btnSaveKhoa" style="min-width: 80px; justify-content: center;">Lưu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('khoaModal');
+            const btnOpen = document.getElementById('btnOpenAddModal');
+            const btnCloseList = document.querySelectorAll('.close-modal');
+            const btnSave = document.getElementById('btnSaveKhoa');
+            const tableBody = document.querySelector('#tableKhoa tbody');
+
+            // 1. Mở Modal & Reset form
+            btnOpen.addEventListener('click', () => {
+                document.getElementById('inputMaKhoa').value = '';
+                document.getElementById('inputTenKhoa').value = '';
+                // Tự động gợi ý năm hiện tại
+                const currentYear = new Date().getFullYear();
+                document.getElementById('inputNamBD').value = currentYear;
+                document.getElementById('inputNamKT').value = currentYear + 4; // Hệ đại học thường 4 năm
+                document.getElementById('inputTrangThai').value = 'active';
+                modal.style.display = 'flex';
+            });
+
+            // 2. Đóng Modal
+            btnCloseList.forEach(btn => btn.addEventListener('click', () => modal.style.display = 'none'));
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) modal.style.display = 'none';
+            });
+
+            // 3. Xử lý Lưu
+            btnSave.addEventListener('click', () => {
+                const ma = document.getElementById('inputMaKhoa').value.trim();
+                const ten = document.getElementById('inputTenKhoa').value.trim();
+                const namBD = document.getElementById('inputNamBD').value;
+                const namKT = document.getElementById('inputNamKT').value;
+                const statusVal = document.getElementById('inputTrangThai').value;
+
+                if (!ma || !ten || !namBD || !namKT) {
+                    alert("Vui lòng nhập đầy đủ thông tin!");
+                    return;
+                }
+
+                // Xử lý hiển thị badge trạng thái
+                let badgeClass = 'status-active';
+                let badgeText = 'Đang đào tạo';
+                if(statusVal === 'finished') {
+                    badgeClass = 'status-finished';
+                    badgeText = 'Đã tốt nghiệp';
+                } else if (statusVal === 'locked') {
+                    badgeClass = 'status-finished'; // Hoặc màu khác
+                    badgeText = 'Tạm khóa';
+                }
+
+                // Tính STT tiếp theo (giả lập)
+                const rowCount = tableBody.rows.length + 1;
+                const stt = rowCount < 10 ? '0' + rowCount : rowCount;
+
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${stt}</td>
+                    <td>${ma}</td>
+                    <td>${ten}</td>
+                    <td>${namBD}</td>
+                    <td>${namKT}</td>
+                    <td><span class="status-badge ${badgeClass}">${badgeText}</span></td>
+                    <td style="text-align: center;">
+                        <button class="action-btn btn-edit-icon" title="Sửa"><i class="fa-regular fa-pen-to-square"></i></button>
+                        <button class="action-btn btn-delete-icon" title="Xóa" onclick="deleteRow(this)"><i class="fa-solid fa-xmark"></i></button>
+                    </td>
+                `;
+
+                tableBody.insertBefore(newRow, tableBody.firstChild); // Thêm lên đầu danh sách
+                modal.style.display = 'none';
+            });
+
+            // 4. Tìm kiếm
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', function() {
+                const keyword = this.value.toLowerCase();
+                const rows = tableBody.querySelectorAll('tr');
+                
+                rows.forEach(row => {
+                    const text = row.innerText.toLowerCase();
+                    row.style.display = text.includes(keyword) ? '' : 'none';
+                });
+            });
+        });
+
+        // Hàm xóa dòng
+        function deleteRow(btn) {
+            if(confirm("Bạn có chắc chắn muốn xóa khóa đào tạo này không?\nDữ liệu sinh viên liên quan có thể bị ảnh hưởng.")) {
+                const row = btn.closest('tr');
+                row.remove();
+            }
+        }
+    </script>
+</body>
+</html>

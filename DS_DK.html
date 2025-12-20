@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý danh sách đăng ký nguyện vọng</title>
+    
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/index.css"> 
+    <link rel="stylesheet" href="/CSS/DS_DK.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/img/82cb2669b39c7ae0fe1d18507ed7c609168a2ad3.png" alt="Logo VLU">
+            </div>
+            <ul class="menu">
+
+                <li class="menu-item">
+                    <div class="menu-link active-parent"> <span><i class="fa-solid fa-layer-group"></i> Đợt đồ án</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu open"> <li><a href="index.html" class="active-sub">Quản lý đợt đồ án</a></li>
+                        <li><a href="DS_DK.html">Danh sách đăng ký</a></li>
+                        <li><a href="DS_DT.html">Danh sách đề tài</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-users"></i> Hội đồng</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="HD_DT.html">Duyệt đề tài</a></li>
+                        <li><a href="HD_BC.html">Báo cáo hội đồng</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-list"></i> Danh mục</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="QL_Nganh.html">Ngành</a></li>
+                        <li><a href="QL_BoMon.html" class="active-sub">Bộ môn</a></li> 
+                        <li><a href="QL_ChuyenNganh.html">Chuyên ngành</a></li>
+                        <li><a href="QL_HocKi.html">Học kì</a></li>
+                        <li><a href="QL_Khoa.html">Khóa</a></li>
+                        <li><a href="QL_CT.html">Chương trình</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="QL_NguoiDung.html" class="menu-link">
+                        <span><i class="fa-solid fa-user-gear"></i> Người dùng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="CH_MAIL.html" class="menu-link">
+                        <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="BCTK.html" class="menu-link">
+                        <span><i class="fa-solid fa-chart-pie"></i> Báo cáo và thống kê</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="uni-name">TRƯỜNG ĐẠI HỌC VĂN LANG</div>
+
+                <div class="header-right-group">
+        
+                <div class="notification-container" id="notifDropdownBtn">
+                    <div class="bell-icon-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge">3</span> </div>
+                    
+                    <div class="notif-dropdown-menu" id="notifDropdown">
+                        <div class="notif-header">
+                            <span>Thông báo</span>
+                            <a href="#" class="mark-read">Đánh dấu đã đọc</a>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Nhắc nhở mở đợt đăng ký</p>
+                                    <p class="n-time">Vừa xong</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Hội đồng KTPM 01 đã được duyệt</p>
+                                    <p class="n-time">1 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Sinh viên nộp báo cáo tiến độ</p>
+                                    <p class="n-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown-container" id="userDropdown">
+                    <div class="user-profile">
+                        <div class="user-info-text">
+                            <span class="user-name">Admin 2174802010297</span>
+                            <span class="user-role">BCN Khoa</span>
+                        </div>
+                        <i class="fa-regular fa-circle-user user-avatar-icon"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-id-badge"></i> Hồ sơ cá nhân
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item logout-item">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="content-card">
+                    <h2 class="page-title" style="margin-bottom: 25px;">Quản lý danh sách đăng ký nguyện vọng</h2>
+                    
+                    <div class="toolbar-row">
+                        <div class="filter-wrapper">
+                            <div class="filter-item">
+                                <label for="filterCohort">Khóa</label>
+                                <select id="filterCohort">
+                                    <option value="">-- Tất cả --</option>
+                                    <option value="26">Khóa 26</option>
+                                    <option value="27">Khóa 27</option>
+                                    <option value="28">Khóa 28</option>
+                                </select>
+                            </div>
+
+                            <div class="filter-item">
+                                <label for="filterMajor">Chuyên ngành</label>
+                                <select id="filterMajor">
+                                    <option value="">-- Tất cả --</option>
+                                    <option value="CNPM">Công nghệ phần mềm (CNPM)</option>
+                                    <option value="TTNT">Trí tuệ nhân tạo (TTNT)</option>
+                                    <option value="IoT">Internet of Things (IoT)</option>
+                                    <option value="HTTT">Hệ thống thông tin (HTTT)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="dataTable">
+                            <thead>
+                                <tr>
+                                    <th>MSSV</th>
+                                    <th>Họ tên</th>
+                                    <th>Khóa</th>
+                                    <th>Chuyên ngành</th>
+                                    <th>Tín chỉ tích lũy</th>
+                                    <th>Trạng thái</th>
+                                    <th>Chi tiết</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                </tbody>
+                        </table>
+                    </div>
+                    
+                    <div id="noDataMessage" style="text-align: center; padding: 20px; color: #777; display: none;">
+                        Không tìm thấy sinh viên phù hợp.
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. DỮ LIỆU GIẢ LẬP (MOCK DATA)
+            const students = [
+                { mssv: "2174802010297", name: "Trương Quốc Duy", cohort: "27", major: "CNPM", credits: 127, status: "Duyệt" },
+                { mssv: "2174802010111", name: "Nguyễn Văn A", cohort: "26", major: "TTNT", credits: 130, status: "Duyệt" },
+                { mssv: "2174802010222", name: "Lê Thị B", cohort: "28", major: "IoT", credits: 100, status: "Từ chối" },
+                { mssv: "2174802010333", name: "Trần Văn C", cohort: "27", major: "CNPM", credits: 115, status: "Chờ duyệt" },
+                { mssv: "2174802010444", name: "Phạm Minh D", cohort: "27", major: "HTTT", credits: 120, status: "Duyệt" },
+                { mssv: "2174802010555", name: "Hoàng Yến E", cohort: "26", major: "CNPM", credits: 135, status: "Duyệt" }
+            ];
+
+            const tableBody = document.getElementById('tableBody');
+            const noDataMsg = document.getElementById('noDataMessage');
+            const filterCohort = document.getElementById('filterCohort');
+            const filterMajor = document.getElementById('filterMajor');
+
+            // 2. HÀM RENDER DỮ LIỆU RA BẢNG
+            function renderTable(data) {
+                tableBody.innerHTML = ''; // Xóa dữ liệu cũ
+
+                if (data.length === 0) {
+                    noDataMsg.style.display = 'block';
+                    return;
+                } else {
+                    noDataMsg.style.display = 'none';
+                }
+
+                data.forEach(sv => {
+                    const row = document.createElement('tr');
+                    
+                    // Xử lý màu sắc trạng thái
+                    let statusClass = '';
+                    if(sv.status === 'Duyệt') statusClass = 'status-approved';
+                    else if(sv.status === 'Từ chối') statusClass = 'status-rejected';
+                    else statusClass = 'status-pending';
+
+                    row.innerHTML = `
+                        <td>${sv.mssv}</td>
+                        <td style="font-weight: 500;">${sv.name}</td>
+                        <td>${sv.cohort}</td>
+                        <td>${sv.major}</td>
+                        <td>${sv.credits}</td>
+                        <td class="status-text ${statusClass}">${sv.status}</td>
+                        <td><a href="#" class="link-detail">Xem chi tiết KQ</a></td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            }
+
+            // 3. HÀM LỌC DỮ LIỆU
+            function filterData() {
+                const cohortVal = filterCohort.value;
+                const majorVal = filterMajor.value;
+
+                const filtered = students.filter(sv => {
+                    // Điều kiện: Nếu chọn "Tất cả" (value rỗng) thì luôn đúng, ngược lại phải khớp giá trị
+                    const matchCohort = cohortVal === '' || sv.cohort === cohortVal;
+                    const matchMajor = majorVal === '' || sv.major === majorVal;
+                    
+                    return matchCohort && matchMajor;
+                });
+
+                renderTable(filtered);
+            }
+
+            // 4. GẮN SỰ KIỆN CHO 2 DROPDOWN
+            filterCohort.addEventListener('change', filterData);
+            filterMajor.addEventListener('change', filterData);
+
+            // 5. CHẠY LẦN ĐẦU KHI TẢI TRANG
+            renderTable(students);
+        });
+    </script>
+</body>
+</html>

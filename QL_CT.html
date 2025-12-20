@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Chương trình đào tạo - VLU</title>
+    
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <style>
+        .btn-green {
+            background-color: #28a745;
+            color: white; border: none; padding: 8px 16px;
+            border-radius: 4px; cursor: pointer; font-size: 13px; font-weight: 600;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .btn-green:hover { background-color: #218838; }
+
+        .switch {
+            position: relative; display: inline-block; width: 40px; height: 20px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc; transition: .4s; border-radius: 20px;
+        }
+        .slider:before {
+            position: absolute; content: "";
+            height: 16px; width: 16px; left: 2px; bottom: 2px;
+            background-color: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: #28a745; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Modal Upload Styles */
+        .upload-area {
+            border: 2px dashed #ddd; padding: 30px; text-align: center;
+            border-radius: 6px; margin-bottom: 20px; cursor: pointer;
+            transition: 0.3s; background: #f9f9f9;
+        }
+        .upload-area:hover { border-color: var(--primary-red); background: #fff5f5; }
+        .upload-icon { font-size: 40px; color: #888; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/img/82cb2669b39c7ae0fe1d18507ed7c609168a2ad3.png" alt="Logo VLU">
+            </div>
+            <ul class="menu">
+
+                <li class="menu-item">
+                    <div class="menu-link active-parent"> <span><i class="fa-solid fa-layer-group"></i> Đợt đồ án</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu open"> <li><a href="index.html" class="active-sub">Quản lý đợt đồ án</a></li>
+                        <li><a href="DS_DK.html">Danh sách đăng ký</a></li>
+                        <li><a href="DS_DT.html">Danh sách đề tài</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-users"></i> Hội đồng</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="HD_DT.html">Duyệt đề tài</a></li>
+                        <li><a href="HD_BC.html">Báo cáo hội đồng</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-list"></i> Danh mục</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="QL_Nganh.html">Ngành</a></li>
+                        <li><a href="QL_BoMon.html" class="active-sub">Bộ môn</a></li> 
+                        <li><a href="QL_ChuyenNganh.html">Chuyên ngành</a></li>
+                        <li><a href="QL_HocKi.html">Học kì</a></li>
+                        <li><a href="QL_Khoa.html">Khóa</a></li>
+                        <li><a href="QL_CT.html">Chương trình</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="QL_NguoiDung.html" class="menu-link">
+                        <span><i class="fa-solid fa-user-gear"></i> Người dùng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="CH_MAIL.html" class="menu-link">
+                        <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="BCTK.html" class="menu-link">
+                        <span><i class="fa-solid fa-chart-pie"></i> Báo cáo và thống kê</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="uni-name">TRƯỜNG ĐẠI HỌC VĂN LANG</div>
+
+                <div class="header-right-group">
+        
+                <div class="notification-container" id="notifDropdownBtn">
+                    <div class="bell-icon-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge">3</span> </div>
+                    
+                    <div class="notif-dropdown-menu" id="notifDropdown">
+                        <div class="notif-header">
+                            <span>Thông báo</span>
+                            <a href="#" class="mark-read">Đánh dấu đã đọc</a>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Nhắc nhở mở đợt đăng ký</p>
+                                    <p class="n-time">Vừa xong</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Hội đồng KTPM 01 đã được duyệt</p>
+                                    <p class="n-time">1 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Sinh viên nộp báo cáo tiến độ</p>
+                                    <p class="n-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown-container" id="userDropdown">
+                    <div class="user-profile">
+                        <div class="user-info-text">
+                            <span class="user-name">Admin 2174802010297</span>
+                            <span class="user-role">BCN Khoa</span>
+                        </div>
+                        <i class="fa-regular fa-circle-user user-avatar-icon"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-id-badge"></i> Hồ sơ cá nhân
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item logout-item">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="content-card">
+                    <h2 class="page-title" style="margin-bottom: 20px;">Quản lý Chương trình đào tạo</h2>
+                    
+                    <div class="toolbar-row" style="justify-content: space-between;">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span class="filter-label">Khóa:</span>
+                            <select class="form-control" style="width: 150px;">
+                                <option>Tất cả</option>
+                                <option selected>K27</option>
+                                <option>K28</option>
+                                <option>K29</option>
+                            </select>
+                        </div>
+
+                        <div style="display:flex; gap: 10px;">
+                            <input type="text" class="toolbar-input" placeholder="Tìm tên chương trình..." style="width: 250px;">
+                            <button class="btn btn-green" id="btnOpenImport">
+                                <i class="fa-solid fa-file-excel"></i> Import Excel
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table id="tableCTDT">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">STT</th>
+                                    <th>Mã chương trình</th>
+                                    <th>Tên chương trình</th>
+                                    <th>Ngành</th>
+                                    <th>Khóa</th>
+                                    <th>Tổng tín chỉ</th>
+                                    <th>Trạng thái</th>
+                                    <th style="text-align: center;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>01</td>
+                                    <td>CT_K26_CNPM</td>
+                                    <td>Khung đào tạo K26 - Công nghệ phần mềm</td>
+                                    <td>CNPM</td>
+                                    <td>K26</td>
+                                    <td>135</td>
+                                    <td>
+                                        <label class="switch">
+                                            <input type="checkbox" checked>
+                                            <span class="slider"></span>
+                                        </label>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <button class="action-btn" title="Chi tiết" onclick="viewDetail('CT_K26_CNPM')">
+                                            <i class="fa-solid fa-eye" style="color: #17a2b8;"></i>
+                                        </button>
+                                        <button class="action-btn btn-delete-icon"><i class="fa-solid fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="importModal">
+        <div class="modal-dialog" style="width: 500px;">
+            <div class="modal-header">
+                <div class="modal-title">Import Chương trình đào tạo</div>
+                <button class="btn-close close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="upload-area" id="dropZone">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <p style="margin-bottom: 5px; font-weight: 500;">Kéo thả file vào đây hoặc click để chọn</p>
+                    <p style="font-size: 12px; color: #666;">Hỗ trợ định dạng: .xlsx, .xls</p>
+                    <input type="file" id="fileInput" accept=".xlsx, .xls" style="display: none;">
+                </div>
+                <div id="fileInfo" style="display: none; margin-bottom: 15px; font-size: 13px; color: var(--primary-red);">
+                    <i class="fa-solid fa-file-excel"></i> <span id="fileName">...</span>
+                </div>
+                
+                <div class="form-group" style="margin-bottom:10px;">
+                    <label>Áp dụng cho Khóa:</label>
+                    <input type="text" class="form-control" value="K27">
+                </div>
+                <div class="form-group">
+                    <label>Tên chương trình:</label>
+                    <input type="text" class="form-control" value="Khung CTĐT K27 CNTT">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary close-modal">Hủy</button>
+                <button class="btn btn-green" id="btnProcessImport">
+                    <i class="fa-solid fa-upload"></i> Tải lên & Xử lý
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('importModal');
+            const dropZone = document.getElementById('dropZone');
+            const fileInput = document.getElementById('fileInput');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            const tableBody = document.querySelector('#tableCTDT tbody');
+
+            // 1. Logic Modal
+            document.getElementById('btnOpenImport').onclick = () => modal.style.display = 'flex';
+            document.querySelectorAll('.close-modal').forEach(btn => btn.onclick = () => modal.style.display = 'none');
+            
+            // 2. Logic Chọn file
+            dropZone.onclick = () => fileInput.click();
+            fileInput.onchange = (e) => {
+                if(e.target.files.length > 0) {
+                    fileInfo.style.display = 'block';
+                    fileName.textContent = e.target.files[0].name;
+                }
+            };
+
+            // 3. XỬ LÝ NÚT IMPORT (Giả lập đọc file và thêm vào danh sách)
+            document.getElementById('btnProcessImport').onclick = () => {
+                if(fileInput.files.length === 0) {
+                    alert("Vui lòng chọn file Excel!");
+                    return;
+                }
+
+                // Giả lập xử lý dữ liệu file (Ở thực tế sẽ dùng SheetJS để parse)
+                // Tạo dòng dữ liệu mới dựa trên file "Khung CTĐT K27..."
+                const newRow = document.createElement('tr');
+                newRow.style.backgroundColor = '#e8f5e9'; // Highlight dòng mới
+                newRow.innerHTML = `
+                    <td>02</td>
+                    <td>CT_K27_CNTT</td>
+                    <td>Khung CTĐT K27 CNTT (Mới Import)</td>
+                    <td>CNTT</td>
+                    <td>K27</td>
+                    <td>145</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+                    <td style="text-align: center;">
+                        <button class="action-btn" title="Chi tiết" onclick="viewDetail('CT_K27_CNTT')">
+                            <i class="fa-solid fa-eye" style="color: #17a2b8;"></i>
+                        </button>
+                        <button class="action-btn btn-delete-icon"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                `;
+                
+                // Thêm vào đầu bảng
+                tableBody.insertBefore(newRow, tableBody.firstChild);
+                modal.style.display = 'none';
+                
+                // Reset input
+                fileInput.value = '';
+                fileInfo.style.display = 'none';
+                
+                alert("Đã import dữ liệu thành công! Vui lòng bấm 'Chi tiết' để xem các học phần.");
+            };
+        });
+
+        // Hàm chuyển trang chi tiết (mở tab mới hoặc load trang mới)
+        function viewDetail(id) {
+            // Trong thực tế sẽ truyền ID qua URL: window.location.href = `ChiTiet_CTDT.html?id=${id}`;
+            window.location.href = 'CT_QL_CT.html';
+        }
+    </script>
+</body>
+</html>

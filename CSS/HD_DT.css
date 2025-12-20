@@ -1,0 +1,81 @@
+.member-search-container {
+    position: relative;
+    flex: 2;
+}
+
+.suggestion-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.suggestion-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.suggestion-item:hover {
+    background-color: #f5f9ff;
+    color: var(--primary-red);
+}
+
+.suggestion-info { display: flex; flex-direction: column; }
+.s-name { font-weight: 600; }
+.s-mssv { font-size: 11px; color: #666; }
+
+/* ---THANH THÊM THÀNH VIÊN --- */
+.add-member-bar {
+    display: flex;
+    gap: 15px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+
+.selected-user-display {
+    display: none;
+    flex: 2;
+    background: #e6f4ea;
+    border: 1px solid #28a745;
+    padding: 6px 12px;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    font-weight: 600;
+    color: #155724;
+}
+
+.btn-remove-selection {
+    cursor: pointer;
+    color: #dc3545;
+    margin-left: 10px;
+}
+.btn-approve-icon {
+    color: #28a745; 
+}
+
+/* --- 3. BẢNG VÀ FORM --- */
+.form-section { margin-bottom: 30px; }
+.role-badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.role-chairman { background: #cfe2ff; color: #084298; } /* Chủ tịch */
+.role-secretary { background: #e2e3e5; color: #41464b; } /* Thư ký */
+.role-member { background: #f8f9fa; border: 1px solid #ddd; color: #666; } /* Ủy viên */

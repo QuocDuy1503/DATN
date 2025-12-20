@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Đợt đồ án - VLU</title>
+    <link rel="stylesheet" href="/CSS/HD_DT.css">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .tab-header {
+            display: flex;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 20px;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: 0.3s;
+        }
+        .tab-btn:hover { color: var(--primary-red); }
+        .tab-btn.active {
+            color: var(--primary-red);
+            border-bottom-color: var(--primary-red);
+        }
+        .tab-content { display: none; animation: fadeIn 0.3s; }
+        .tab-content.active { display: block; }
+
+        .toggle-btn {
+            background: none; border: none; cursor: pointer;
+            font-size: 16px; width: 30px; height: 30px;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; transition: 0.2s;
+        }
+        .toggle-btn:hover { background: #eee; }
+        .detail-row { background-color: #f9f9f9; }
+        .student-table {
+            width: 95%; margin: 10px auto; 
+            border: 1px solid #ddd; background: white;
+        }
+        .student-table th { background: #f1f1f1; font-size: 12px; }
+        .student-table td { font-size: 12px; padding: 8px 15px; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/img/82cb2669b39c7ae0fe1d18507ed7c609168a2ad3.png" alt="Logo VLU">
+            </div>
+            <ul class="menu">
+
+                <li class="menu-item">
+                    <div class="menu-link active-parent"> <span><i class="fa-solid fa-layer-group"></i> Đợt đồ án</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu open"> <li><a href="index.html" class="active-sub">Quản lý đợt đồ án</a></li>
+                        <li><a href="DS_DK.html">Danh sách đăng ký</a></li>
+                        <li><a href="DS_DT.html">Danh sách đề tài</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-users"></i> Hội đồng</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="HD_DT.html">Duyệt đề tài</a></li>
+                        <li><a href="HD_BC.html">Báo cáo hội đồng</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-list"></i> Danh mục</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="QL_Nganh.html">Ngành</a></li>
+                        <li><a href="QL_BoMon.html" class="active-sub">Bộ môn</a></li> 
+                        <li><a href="QL_ChuyenNganh.html">Chuyên ngành</a></li>
+                        <li><a href="QL_HocKi.html">Học kì</a></li>
+                        <li><a href="QL_Khoa.html">Khóa</a></li>
+                        <li><a href="QL_CT.html">Chương trình</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="QL_NguoiDung.html" class="menu-link">
+                        <span><i class="fa-solid fa-user-gear"></i> Người dùng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="CH_MAIL.html" class="menu-link">
+                        <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="BCTK.html" class="menu-link">
+                        <span><i class="fa-solid fa-chart-pie"></i> Báo cáo và thống kê</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="uni-name">TRƯỜNG ĐẠI HỌC VĂN LANG</div>
+
+                <div class="header-right-group">
+        
+                <div class="notification-container" id="notifDropdownBtn">
+                    <div class="bell-icon-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge">3</span> </div>
+                    
+                    <div class="notif-dropdown-menu" id="notifDropdown">
+                        <div class="notif-header">
+                            <span>Thông báo</span>
+                            <a href="#" class="mark-read">Đánh dấu đã đọc</a>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Nhắc nhở mở đợt đăng ký</p>
+                                    <p class="n-time">Vừa xong</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Hội đồng KTPM 01 đã được duyệt</p>
+                                    <p class="n-time">1 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Sinh viên nộp báo cáo tiến độ</p>
+                                    <p class="n-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown-container" id="userDropdown">
+                    <div class="user-profile">
+                        <div class="user-info-text">
+                            <span class="user-name">Admin 2174802010297</span>
+                            <span class="user-role">BCN Khoa</span>
+                        </div>
+                        <i class="fa-regular fa-circle-user user-avatar-icon"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-id-badge"></i> Hồ sơ cá nhân
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item logout-item">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="content-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                        <h2 class="page-title">Quản lý hội đồng báo cáo</h2>
+                        <a href="HD_BC.html" style="color:#666; font-size:14px;"><i class="fa-solid fa-arrow-left"></i> Quay lại</a>
+                    </div>
+
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label>Tên hội đồng:</label>
+                            <input type="text" class="form-control" value="Hội đồng KTPM 01" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Địa điểm:</label>
+                            <input type="text" class="form-control" value="F.02.02" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Thời gian:</label>
+                            <input type="text" class="form-control" value="08:00 - 27/11/2025" readonly>
+                        </div>
+                    </div>
+
+                    <div class="tab-header">
+                        <div class="tab-btn active" onclick="switchTab('tabMembers', this)">Thành viên</div>
+                        <div class="tab-btn" onclick="switchTab('tabTopics', this)">Đề tài</div>
+                    </div>
+
+                    <div id="tabMembers" class="tab-content active">
+                        <div class="add-member-bar">
+    
+                            <div class="member-search-container" id="searchContainer">
+                                <input type="text" id="inputSearch" class="form-control" placeholder="Nhập tên, email hoặc MSSV giảng viên..." autocomplete="off">
+                                <div class="suggestion-box" id="suggestionBox"></div>
+                            </div>
+
+                            <div class="selected-user-display" id="selectedDisplay">
+                                <span id="selectedNameText">Trương Quốc Duy (2174802010297)</span>
+                                <i class="fa-solid fa-xmark btn-remove-selection" id="btnClearSelection" title="Bỏ chọn"></i>
+                            </div>
+
+                            <select class="form-control" id="selectRole" style="width: 150px;">
+                                <option value="Ủy viên">Ủy viên</option>
+                                <option value="Thư ký">Thư ký</option>
+                                <option value="Chủ tịch">Chủ tịch</option>
+                            </select>
+
+                            <button class="btn btn-primary" id="btnAddMember">
+                                <i class="fa-solid fa-plus"></i> Thêm
+                            </button>
+                        </div>
+                        
+                        <table id="memberTable">
+                            <thead>
+                                <tr>
+                                    <th>Mã GV</th>
+                                    <th>Họ và tên</th>
+                                    <th>Email</th>
+                                    <th>SĐT</th>    <th>Học vị</th> <th>Vai trò</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                </tbody>
+                        </table>
+                    </div>
+
+                    <div id="tabTopics" class="tab-content">
+                        <div style="display: flex; gap: 15px; margin-bottom: 20px; align-items: flex-end;">
+                            <div class="form-group" style="width: 200px; margin-bottom: 0;">
+                                <label>Bộ môn đề xuất:</label>
+                                <select class="form-control" id="deptFilter">
+                                    <option value="CNPM">CNPM</option>
+                                    <option value="HTTT">HTTT</option>
+                                </select>
+                            </div>
+                            <div class="member-search-container" style="position: relative; flex: 1;">
+                                <label style="font-size:13px; font-weight:500; margin-bottom:6px; display:block;">Thêm đề tài:</label>
+                                <div style="display:flex; gap: 10px;">
+                                    <input type="text" id="topicSearch" class="form-control" placeholder="Nhập tên đề tài..." autocomplete="off">
+                                    <button class="btn btn-primary" style="background:#6f42c1;"> <i class="fa-solid fa-plus"></i> Thêm</button>
+                                </div>
+                                <div class="suggestion-box" id="topicSuggestionBox" style="top: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table id="topicTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px;"></th>
+                                        <th>Tên đề tài</th>
+                                        <th>Chuyên ngành</th>
+                                        <th>GV Hướng dẫn</th>
+                                        <th>Tài liệu báo cáo</th>
+                                        <th>Đánh giá & Nhận xét</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="parent-row">
+                                        <td><button class="toggle-btn" onclick="toggleRow(this)"><i class="fa-solid fa-plus"></i></button></td>
+                                        <td style="font-weight: 500;">Kiến trúc Học sâu lai cho phân đoạn khối u não trên ảnh MRI đa phương thức với Bộ dữ liệu BraTS</td>
+                                        <td>CNPM</td>
+                                        <td>Trương Quốc Duy</td>
+                                        <td><a href="#" style="color:blue;">DATN_202</a></td>
+                                        <td><a href="#" style="color:blue;">Đánh giá và nhận xét</a></td>
+                                        <td><button class="btn-delete-icon action-btn"><i class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
+                                    <tr class="detail-row" style="display:none;">
+                                        <td colspan="7">
+                                            <table class="student-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>MSSV</th>
+                                                        <th>Họ và tên sinh viên</th>
+                                                        <th>Khóa</th>
+                                                        <th>Chuyên ngành</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2174802010297</td>
+                                                        <td>Trương Quốc Duy</td>
+                                                        <td>K27</td>
+                                                        <td>CNPM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2174802010311</td>
+                                                        <td>Nguyễn Văn A</td>
+                                                        <td>K27</td>
+                                                        <td>CNPM</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:30px; display: flex; justify-content: flex-end; gap: 10px; border-top: 1px solid #eee; padding-top: 20px;">
+                        <button class="btn btn-save" onclick="alert('Đã lưu dữ liệu!')">
+                            <i class="fa-solid fa-floppy-disk"></i> Lưu
+                        </button>
+                        <button class="btn" style="background-color: #28a745; color: white;" onclick="approveCouncil()">
+                            <i class="fa-solid fa-check"></i> Duyệt hội đồng
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // =============================================================
+            // PHẦN 1: LOGIC TAB THÀNH VIÊN (Members)
+            // =============================================================
+            
+            // Dữ liệu giả lập giảng viên
+            const usersDB = [
+                { id: "2174802010297", name: "Trương Quốc Duy", email: "duy.2174802010297@vanlanguni.vn", phone: "0993122505", degree: "Tiến sĩ" },
+                { id: "GV001", name: "Ngô Thị Tuyết Như", email: "nhu.ngo@vanlanguni.vn", phone: "", degree: "Thạc sĩ" },
+                { id: "GV002", name: "Nguyễn Văn A", email: "a.nguyen@vanlanguni.vn", phone: "0909123456", degree: "" } 
+            ];
+
+            const inputSearch = document.getElementById('inputSearch');
+            const suggestionBox = document.getElementById('suggestionBox');
+            const searchContainer = document.getElementById('searchContainer');
+            const selectedDisplay = document.getElementById('selectedDisplay');
+            const selectedNameText = document.getElementById('selectedNameText');
+            const btnClearSelection = document.getElementById('btnClearSelection');
+            const btnAddMember = document.getElementById('btnAddMember');
+            const selectRole = document.getElementById('selectRole');
+            const memberTableBody = document.querySelector('#memberTable tbody');
+            
+            // BIẾN QUAN TRỌNG: Lưu user đang chọn
+            let currentUser = null; 
+
+            // 1.1 Tìm kiếm giảng viên
+            if(inputSearch) {
+                inputSearch.addEventListener('input', function() {
+                    const keyword = this.value.toLowerCase().trim();
+                    suggestionBox.innerHTML = ''; 
+
+                    if (keyword.length === 0) {
+                        suggestionBox.style.display = 'none';
+                        return;
+                    }
+
+                    const matches = usersDB.filter(u => 
+                        u.id.toLowerCase().includes(keyword) || 
+                        u.name.toLowerCase().includes(keyword)
+                    );
+
+                    if (matches.length > 0) {
+                        suggestionBox.style.display = 'block';
+                        matches.forEach(user => {
+                            const div = document.createElement('div');
+                            div.className = 'suggestion-item';
+                            div.innerHTML = `
+                                <div class="suggestion-info">
+                                    <span class="s-name">${user.name}</span>
+                                    <span class="s-mssv">${user.id}</span>
+                                </div>
+                                <i class="fa-solid fa-plus" style="color:#aaa;"></i>
+                            `;
+                            div.onclick = () => {
+                                currentUser = user; // CẬP NHẬT BIẾN GLOBAL
+                                selectUser(user);
+                            };
+                            suggestionBox.appendChild(div);
+                        });
+                    } else {
+                        suggestionBox.style.display = 'none';
+                    }
+                });
+            }
+
+            // 1.2 Hàm cập nhật giao diện khi chọn
+            function selectUser(user) {
+                inputSearch.value = '';
+                suggestionBox.style.display = 'none';
+                searchContainer.style.display = 'none';
+                selectedNameText.textContent = `${user.name} (${user.id})`;
+                selectedDisplay.style.display = 'flex'; 
+            }
+
+            // 1.3 Bỏ chọn
+            if(btnClearSelection) {
+                btnClearSelection.addEventListener('click', () => {
+                    currentUser = null;
+                    selectedDisplay.style.display = 'none';
+                    searchContainer.style.display = 'block';
+                    inputSearch.focus();
+                });
+            }
+
+            // 1.4 Thêm vào bảng thành viên
+            if(btnAddMember) {
+                btnAddMember.addEventListener('click', () => {
+                    if (!currentUser) { alert('Vui lòng chọn thành viên!'); return; }
+                    
+                    const role = selectRole.value;
+                    let roleClass = 'role-member';
+                    if(role === 'Chủ tịch') roleClass = 'role-chairman';
+                    if(role === 'Thư ký') roleClass = 'role-secretary';
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${currentUser.id}</td>
+                        <td style="font-weight:500;">${currentUser.name}</td>
+                        <td>${currentUser.email}</td>
+                        <td>${currentUser.phone || ''}</td> <td>${currentUser.degree || ''}</td> <td><span class="role-badge ${roleClass}">${role}</span></td>
+                        <td>
+                            <button class="action-btn btn-delete-icon" onclick="this.closest('tr').remove()">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    memberTableBody.appendChild(row);
+                    btnClearSelection.click(); 
+                });
+            }
+
+            // =============================================================
+            // PHẦN 2: LOGIC TAB ĐỀ TÀI (Topics)
+            // =============================================================
+
+            const topicsDB = [
+                { 
+                    id: "DT01", name: "Xây dựng hệ thống Chatbot AI tư vấn tuyển sinh", 
+                    major: "CNPM", gv: "Nguyễn Văn A", 
+                    students: [
+                        { mssv: "2174802010111", name: "Lê Văn B", k: "K27", major: "CNPM" },
+                        { mssv: "2174802010222", name: "Phạm Thị C", k: "K27", major: "CNPM" }
+                    ]
+                },
+                { 
+                    id: "DT02", name: "Phát hiện gian lận thẻ tín dụng bằng Deep Learning", 
+                    major: "HTTT", gv: "Trần Thị D",
+                    students: [
+                        { mssv: "2174802010333", name: "Hoàng Văn E", k: "K27", major: "HTTT" }
+                    ]
+                },
+                { 
+                    id: "DT03", name: "Ứng dụng Blockchain trong quản lý văn bằng", 
+                    major: "ATTT", gv: "Lê Thị F",
+                    students: [
+                        { mssv: "2174802010444", name: "Võ Tấn G", k: "K27", major: "ATTT" },
+                        { mssv: "2174802010555", name: "Đinh Hoàng H", k: "K27", major: "ATTT" }
+                    ]
+                }
+            ];
+
+            const topicSearch = document.getElementById('topicSearch');
+            const topicSuggestionBox = document.getElementById('topicSuggestionBox');
+            const topicTableBody = document.querySelector('#topicTable tbody');
+
+            // 2.1 Tìm kiếm đề tài
+            if(topicSearch) {
+                topicSearch.addEventListener('input', function() {
+                    const val = this.value.toLowerCase();
+                    topicSuggestionBox.innerHTML = '';
+                    
+                    if(val.length > 0) {
+                        const matches = topicsDB.filter(t => t.name.toLowerCase().includes(val));
+                        if(matches.length > 0) {
+                            topicSuggestionBox.style.display = 'block';
+                            matches.forEach(t => {
+                                const div = document.createElement('div');
+                                div.className = 'suggestion-item';
+                                div.innerHTML = `<strong>${t.name}</strong> <br><span style="font-size:11px; color:#666;">GVHD: ${t.gv}</span>`;
+                                div.onclick = () => {
+                                    addTopicToTable(t);
+                                    topicSuggestionBox.style.display = 'none';
+                                    topicSearch.value = '';
+                                };
+                                topicSuggestionBox.appendChild(div);
+                            });
+                        } else {
+                            topicSuggestionBox.style.display = 'none';
+                        }
+                    } else {
+                        topicSuggestionBox.style.display = 'none';
+                    }
+                });
+            }
+
+            // 2.2 Hàm GLOBAL để HTML gọi được (addTopic, deleteTopic, toggleRow, switchTab)
+            window.addTopicToTable = function(topic) {
+                const trParent = document.createElement('tr');
+                trParent.className = 'parent-row';
+                trParent.innerHTML = `
+                    <td><button class="toggle-btn" onclick="toggleRow(this)"><i class="fa-solid fa-plus"></i></button></td>
+                    <td style="font-weight: 500;">${topic.name}</td>
+                    <td>${topic.major}</td>
+                    <td>${topic.gv}</td>
+                    <td><a href="#" style="color:blue;">File_baocao.pdf</a></td>
+                    <td><a href="#" style="color:blue;">Đánh giá</a></td>
+                    <td>
+                        <button class="action-btn btn-delete-icon" onclick="deleteTopic(this)">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+
+                const trChild = document.createElement('tr');
+                trChild.className = 'detail-row';
+                trChild.style.display = 'none';
+                
+                let studentsHtml = '';
+                topic.students.forEach(s => {
+                    studentsHtml += `
+                        <tr>
+                            <td>${s.mssv}</td>
+                            <td>${s.name}</td>
+                            <td>${s.k}</td>
+                            <td>${s.major}</td>
+                        </tr>
+                    `;
+                });
+
+                trChild.innerHTML = `
+                    <td colspan="7">
+                        <table class="student-table" style="width:95%; margin:0 auto; background:#fff; border:1px solid #ddd;">
+                            <thead>
+                                <tr style="background:#f1f1f1;">
+                                    <th>MSSV</th>
+                                    <th>Họ và tên sinh viên</th>
+                                    <th>Khóa</th>
+                                    <th>Chuyên ngành</th>
+                                </tr>
+                            </thead>
+                            <tbody>${studentsHtml}</tbody>
+                        </table>
+                    </td>
+                `;
+
+                topicTableBody.appendChild(trParent);
+                topicTableBody.appendChild(trChild);
+            }
+
+            window.deleteTopic = function(btn) {
+                if(confirm('Bạn có chắc muốn xóa đề tài này khỏi hội đồng không?')) {
+                    const parentRow = btn.closest('tr');
+                    const childRow = parentRow.nextElementSibling;
+                    if(childRow && childRow.classList.contains('detail-row')) {
+                        childRow.remove();
+                    }
+                    parentRow.remove();
+                }
+            }
+
+            window.toggleRow = function(btn) {
+                const tr = btn.closest('tr');
+                const nextTr = tr.nextElementSibling;
+                const icon = btn.querySelector('i');
+
+                if (nextTr && nextTr.classList.contains('detail-row')) {
+                    if (nextTr.style.display === 'none') {
+                        nextTr.style.display = 'table-row';
+                        icon.classList.remove('fa-plus');
+                        icon.classList.add('fa-minus');
+                        tr.style.backgroundColor = '#f9f9f9';
+                    } else {
+                        nextTr.style.display = 'none';
+                        icon.classList.remove('fa-minus');
+                        icon.classList.add('fa-plus');
+                        tr.style.backgroundColor = 'white';
+                    }
+                }
+            }
+            
+            window.switchTab = function(tabId, btnElement) {
+                document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+                document.getElementById(tabId).classList.add('active');
+                btnElement.classList.add('active');
+            }
+
+            window.approveCouncil = function() {
+                if(confirm("Xác nhận duyệt hội đồng báo cáo này?\nCác giảng viên sẽ nhận được thông báo chấm điểm.")) {
+                    alert("Đã duyệt thành công!");
+                    window.location.href = "HD_BC.html";
+                }
+            }
+
+            // Xử lý sự kiện click ra ngoài để đóng gợi ý
+            document.addEventListener('click', (e) => {
+                if (searchContainer && !searchContainer.contains(e.target)) suggestionBox.style.display = 'none';
+                if (topicSearch && !topicSearch.closest('.member-search-container').contains(e.target)) topicSuggestionBox.style.display = 'none';
+            });
+        });
+    </script>
+
+</body>
+</html>

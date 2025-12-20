@@ -1,0 +1,48 @@
+.filter-wrapper {
+    display: flex;
+    gap: 20px; 
+    align-items: flex-end;
+}
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filter-item label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+}
+
+.filter-item select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 13px;
+    min-width: 200px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.filter-item select:focus {
+    border-color: var(--primary-red);
+    outline: none;
+}
+.status-text {
+    font-weight: 600;
+}
+.status-approved { color: #1e7e34; }
+.status-rejected { color: #dc3545; } 
+.status-pending { color: #856404; }
+
+.link-detail {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+}
+.link-detail:hover {
+    text-decoration: underline;
+}
