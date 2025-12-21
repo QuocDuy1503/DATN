@@ -58,9 +58,14 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="CH_MAIL.html" class="menu-link">
+                    <div class="menu-link">
                         <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
-                    </a>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="CH_MAIL.html">Thông báo</a></li>
+                        <li><a href="TC.html">Tiêu chí</a></li>
+                    </ul>
                 </li>
                 <li class="menu-item">
                     <a href="BCTK.html" class="menu-link">
@@ -162,16 +167,22 @@
                                     <option value="K28">Khóa 28</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Ngày bắt đầu đợt (Có thể sửa - Sẽ tính lại toàn bộ ngày bên dưới):</label>
-                            <input type="date" id="eMainStart" class="form-control" style="width: 250px;">
+
+
+                            <div class="form-group">
+                                <label>Ngày bắt đầu đợt:</label>
+                                <input type="date" id="eMainStart" class="form-control" style="width: 250px;">
+                            </div>
+                            <div class="form-group">
+                                <label>Ngày bắt đầu đợt:</label>
+                                <input type="date" id="eMainStart" class="form-control" style="width: 250px;">
+                            </div>
                         </div>
                     </div>
 
                     <div class="phase-section">
                         <div class="phase-header" onclick="togglePhase(this)">
-                            1. Giai đoạn chuẩn bị (3 Tuần)
+                            1. Giai đoạn chuẩn bị
                             <i class="fa-solid fa-chevron-down"></i>  
                         </div>
                         <div class="phase-content">
@@ -179,7 +190,7 @@
                                 <div class="form-group" style="margin-bottom:10px;"><label>Đăng ký nguyện vọng:</label>
                                     <div style="display:flex; gap:10px"><input type="date" id="dkStart" class="form-control edit-date-input"><input type="date" id="dkEnd" class="form-control edit-date-input"></div>
                                 </div>
-                                <div class="form-group" style="margin-bottom:10px;"><label>Duyệt NV:</label>
+                                <div class="form-group" style="margin-bottom:10px;"><label>Duyệt nguyện vọng:</label>
                                     <div style="display:flex; gap:10px"><input type="date" id="duyetNVStart" class="form-control edit-date-input"><input type="date" id="duyetNVEnd" class="form-control edit-date-input"></div>
                                 </div>
                                 <div class="form-group" style="margin-bottom:10px;"><label>Đề xuất đề tài:</label>
@@ -194,13 +205,31 @@
 
                     <div class="phase-section">
                         <div class="phase-header" onclick="togglePhase(this)">
-                            2. Giai đoạn chính thức (13 Tuần)
+                            2. Giai đoạn chính thức
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
                         <div class="phase-content">
                              <div class="phase-sub-content">
-                                <div class="form-group"><label>Nộp đề cương:</label>
-                                    <div style="display:flex; gap:10px"><input type="date" id="deCuongStart" class="form-control edit-date-input"><input type="date" id="deCuongEnd" class="form-control edit-date-input"></div>
+                                <div class="form-group" style="margin-bottom:10px;">
+                                    <label>Nộp đề cương:</label>
+                                    <div style="display:flex; gap:10px">
+                                        <input type="date" id="deCuongStart" class="form-control edit-date-input">
+                                        <input type="date" id="deCuongEnd" class="form-control edit-date-input">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:10px;">
+                                    <label>Nộp báo cáo giữa kỳ:</label>
+                                    <div style="display:flex; gap:10px">
+                                        <input type="date" id="deCuongStart" class="form-control edit-date-input">
+                                        <input type="date" id="deCuongEnd" class="form-control edit-date-input">
+                                    </div>
+                                </div>
+                                <div class="form-group" style="margin-bottom:10px;">
+                                    <label>Nộp báo cáo cuối kì:</label>
+                                    <div style="display:flex; gap:10px">
+                                        <input type="date" id="deCuongStart" class="form-control edit-date-input">
+                                        <input type="date" id="deCuongEnd" class="form-control edit-date-input">
+                                    </div>
                                 </div>
                              </div>
                         </div>
@@ -213,8 +242,14 @@
                         </div>
                         <div class="phase-content">
                             <div class="form-grid">
-                                <div class="form-group"><label>Bắt đầu:</label><input type="date" id="reportStart" class="form-control edit-date-input"></div>
-                                <div class="form-group"><label>Hết hạn đợt:</label><input type="date" id="reportEnd" class="form-control edit-date-input" style="border-color:var(--primary-red)"></div>
+                                <div class="form-group">
+                                    <label>Bắt đầu:</label>
+                                    <input type="date" id="reportStart" class="form-control edit-date-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>Hết hạn đợt:</label>
+                                    <input type="date" id="reportEnd" class="form-control edit-date-input" style="border-color:var(--primary-red)">
+                                </div>
                             </div>
                         </div>
                     </div>

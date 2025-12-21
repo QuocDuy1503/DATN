@@ -14,6 +14,17 @@
     /* border: 1px solid #eee; */
     /* box-shadow: none;  */
 }
+.filter-wrapper {
+    display: flex; 
+    gap: 20px; 
+    align-items: center;
+}
+.filter-item {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+    gap: 5px; 
+}
 .toolbar-left, .toolbar-right { display: flex; align-items: center; gap: 10px; }
 .filter-label { font-weight: 600; font-size: 14px; color: #333; }
 .toolbar-input { padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px; height: 36px; }

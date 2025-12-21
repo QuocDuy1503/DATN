@@ -1,0 +1,104 @@
+/* ketquahoctap.css */
+
+/* --- THÔNG TIN SINH VIÊN (HEADER CỦA BẢNG) --- */
+.student-info-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-column h4 {
+    margin-bottom: 15px;
+    color: var(--primary-red);
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 8px;
+    font-size: 13px;
+}
+
+.info-label {
+    width: 120px;
+    font-weight: 600;
+    color: #555;
+}
+
+.info-value {
+    color: #333;
+    font-weight: 500;
+}
+
+/* --- TÙY CHỈNH BẢNG ĐIỂM --- */
+.table-responsive {
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+table th {
+    background-color: #f8f9fa;
+    color: #444;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-top: 1px solid #eee;
+}
+
+/* Căn giữa các cột ngắn */
+.text-center { text-align: center !important; }
+
+/* Cột điểm số - Tô đậm */
+.grade-number { font-weight: 700; color: #333; }
+.grade-letter { font-weight: 600; }
+
+/* Màu sắc điểm chữ */
+.grade-A { color: #28a745; } /* A - Xanh lá */
+.grade-B { color: #17a2b8; } /* B - Xanh dương */
+.grade-C { color: #ffc107; } /* C - Vàng */
+.grade-D { color: #fd7e14; } /* D - Cam */
+.grade-F { color: #dc3545; } /* F - Đỏ */
+
+/* --- ICON KẾT QUẢ --- */
+.result-icon {
+    font-size: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+}
+
+/* Dấu Tích (Đạt) */
+.result-pass {
+    color: #28a745;
+    background-color: #e6f4ea;
+}
+
+/* Dấu X (Rớt) */
+.result-fail {
+    color: #dc3545;
+    background-color: #ffe6e6;
+}
+
+/* --- TỔNG KẾT --- */
+.summary-footer {
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border: 1px solid #eee;
+    border-top: none;
+    display: flex;
+    justify-content: flex-end;
+    gap: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+.summary-item span { color: var(--primary-red); font-weight: 700; font-size: 16px; margin-left: 5px; }

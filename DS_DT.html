@@ -9,57 +9,62 @@
     <link rel="stylesheet" href="/CSS/index.css"> 
     <link rel="stylesheet" href="/CSS/DS_DT.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Container bao quanh các bộ lọc */
-.filter-wrapper {
-    display: flex;
-    align-items: center; /* Căn giữa theo chiều dọc */
-    width: 100%;
-    gap: 20px; /* Khoảng cách giữa các nhóm lọc */
-    flex-wrap: wrap; /* Xuống dòng nếu màn hình quá nhỏ */
-}
+   <style>
+    /* Container bao quanh các bộ lọc */
+    .filter-wrapper {
+        display: flex;
+        width: 100%;
+        gap: 20px;
+        flex-wrap: wrap;
+        align-items: flex-end; 
+    }
 
-/* Đồng bộ style cho từng item lọc (Học kỳ, Chuyên ngành, Mã số) */
-.filter-item, 
-.toolbar-left > div { /* Chọn cả thẻ div con của toolbar-left */
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Khoảng cách giữa Label và Input/Select */
-}
+    /* Từng khối lọc (Label + Input) */
+    .filter-item {
+        display: flex;
+        flex-direction: column; /* QUAN TRỌNG: Đưa Label lên trên Input */
+        gap: 5px;
+        align-items: flex-start;
+    }
 
-/* Style cho Label (Học kỳ, Chuyên ngành, Mã số) */
-.filter-label, 
-.filter-item label {
-    font-weight: 600; /* In đậm nhẹ */
-    white-space: nowrap; /* Không xuống dòng */
-    margin-bottom: 0; /* Loại bỏ margin mặc định của label */
-    color: #333;
-}
+    /* Style cho Label (Đồng bộ với DS_DK) */
+    .filter-item label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #555;
+        margin-bottom: 0;
+        white-space: nowrap;
+    }
 
-/* Đồng bộ giao diện Input và Select */
-.filter-item select, 
-.filter-item input,
-.form-control {
-    height: 38px; /* Chiều cao cố định để bằng nhau */
-    padding: 6px 12px;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    outline: none;
-    font-size: 14px;
-    min-width: 220px; /* Độ rộng tối thiểu */
-}
+    /* Style cho Input và Select */
+    .filter-item select, 
+    .filter-item input {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 13px;
+        min-width: 200px; /* Độ rộng tối thiểu */
+        height: 38px;     /* Chiều cao cố định */
+        background-color: white;
+        outline: none;
+    }
 
-/* --- XỬ LÝ ĐẨY TÌM KIẾM SANG PHẢI --- */
-/* Chọn phần tử filter-item cuối cùng (Mã số) và đẩy nó ra xa */
-.filter-wrapper .filter-item:last-child {
-    margin-left: auto; /* Đây là lệnh quan trọng để đẩy sát lề phải */
-}
+    /* Hiệu ứng focus */
+    .filter-item select:focus,
+    .filter-item input:focus {
+        border-color: #D71920;
+    }
 
-/* Tùy chỉnh riêng cho ô tìm kiếm nếu cần đẹp hơn */
-#filterID {
-    width: 250px; /* Rộng hơn một chút so với dropdown */
-}
-    </style>
+    /* Đẩy ô tìm kiếm (phần tử cuối cùng) sang sát lề phải */
+    .filter-wrapper .filter-item:last-child {
+        margin-left: auto;
+    }
+
+    /* Tùy chỉnh riêng cho ô tìm kiếm dài hơn chút cho đẹp */
+    #filterID {
+        width: 250px;
+    }
+</style>
 </head>
 <body>
     <div class="wrapper">
@@ -111,9 +116,14 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="CH_MAIL.html" class="menu-link">
+                    <div class="menu-link">
                         <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
-                    </a>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="CH_MAIL.html">Thông báo</a></li>
+                        <li><a href="TC.html">Tiêu chí</a></li>
+                    </ul>
                 </li>
                 <li class="menu-item">
                     <a href="BCTK.html" class="menu-link">
@@ -198,18 +208,24 @@
                     <h2 class="page-title" style="margin-bottom: 25px;">Quản lý danh sách đề tài</h2>
                     
                     <div class="filter-wrapper">
-
-                        <div class="toolbar-left">
-                            <div style="display:flex; align-items:center; gap:10px;">
-                                <span class="filter-label" style="white-space: nowrap;">Học kỳ:</span>
-                                <select class="form-control" style="width: 220px; cursor: pointer;">
-                                    <option value="241" selected>HK 241 (2024-2025)</option>
-                                    <option value="242">HK 242 (2024-2025)</option>
-                                    <option value="243">HK 243 (2024-2025)</option>
-                                    <option value="233">HK 233 (2023-2024)</option>
+                            <div class="filter-item">
+                                <label>Đợt đồ án</label>
+                                <select id="filterCohort">
+                                    <option value="">-- Chọn đợt --</option>
+                                    <option value="26">DATN_101</option>
+                                    <option value="27">DATN_102</option>
+                                    <option value="28">DATN_103</option>
                                 </select>
                             </div>
-                        </div>
+                            <div class="filter-item">
+                                <label>Năm học</label>
+                                <select id="filterCohort">
+                                    <option value="">-- Chọn năm học --</option>
+                                    <option value="26">2023-2024</option>
+                                    <option value="27">2024-2025</option>
+                                    <option value="28">2025-2026</option>
+                                </select>
+                            </div>
 
                         <div class="filter-item">
                             <label>Chuyên ngành</label>
@@ -315,7 +331,7 @@
                             <td>${p.supervisor}</td>
                             <td class="col-major">${p.major}</td>
                             <td class="${statusClass}">${p.status}</td>
-                            <td><span class="link-detail">Xem chi tiết đề tài</span></td>
+                            <td><a href="CT_DT.html?id=${p.id}" class="link-detail">Xem chi tiết đề tài</a></td>
                         </tr>
                     `;
                     tableBody.innerHTML += row;

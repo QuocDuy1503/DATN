@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiêu chí chấm điểm</title>
+    <link rel="stylesheet" href="/CSS/index.css">
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- FORM CHỌN LOẠI PHIẾU --- */
+.setup-header {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    margin-bottom: 25px;
+}
+
+.setup-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+/* --- BẢNG NHẬP TIÊU CHÍ --- */
+.criteria-table th {
+    background-color: #f1f3f5;
+    color: #333;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.criteria-table input,
+.criteria-table textarea {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px;
+    width: 100%;
+    font-size: 13px;
+    resize: vertical; /* Cho phép kéo giãn chiều cao textarea */
+}
+
+.criteria-table input:focus,
+.criteria-table textarea:focus {
+    border-color: #D71920;
+    outline: none;
+}
+
+/* Cột trọng số và điểm */
+.input-number {
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Nút xóa dòng */
+.btn-remove-row {
+    color: #dc3545;
+    cursor: pointer;
+    font-size: 16px;
+    background: none;
+    border: none;
+    transition: 0.2s;
+}
+.btn-remove-row:hover {
+    color: #a71d2a;
+    transform: scale(1.1);
+}
+
+/* --- THANH TỔNG KẾT (FOOTER FIXED) --- */
+.total-summary-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    padding: 15px 20px;
+    border-top: 2px solid #eee;
+    margin-top: 10px;
+}
+
+.total-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+}
+
+.total-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #D71920;
+}
+
+.total-valid {
+    color: #28a745 !important; /* Màu xanh khi đủ 100% */
+}
+
+.btn-add-row {
+    background-color: #e7f1ff;
+    color: #0d6efd;
+    border: 1px dashed #0d6efd;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-add-row:hover {
+    background-color: #d0e3ff;
+}
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <img src="/img/82cb2669b39c7ae0fe1d18507ed7c609168a2ad3.png" alt="Logo VLU">
+            </div>
+            <ul class="menu">
+
+                <li class="menu-item">
+                    <div class="menu-link active-parent"> <span><i class="fa-solid fa-layer-group"></i> Đợt đồ án</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu open"> <li><a href="index.html" class="active-sub">Quản lý đợt đồ án</a></li>
+                        <li><a href="DS_DK.html">Danh sách đăng ký</a></li>
+                        <li><a href="DS_DT.html">Danh sách đề tài</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-users"></i> Hội đồng</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="HD_DT.html">Duyệt đề tài</a></li>
+                        <li><a href="HD_BC.html">Báo cáo hội đồng</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-list"></i> Danh mục</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="QL_Nganh.html">Ngành</a></li>
+                        <li><a href="QL_BoMon.html" class="active-sub">Bộ môn</a></li> 
+                        <li><a href="QL_ChuyenNganh.html">Chuyên ngành</a></li>
+                        <li><a href="QL_HocKi.html">Học kì</a></li>
+                        <li><a href="QL_Khoa.html">Khóa</a></li>
+                        <li><a href="QL_CT.html">Chương trình</a></li>
+                    </ul>
+                </li>
+
+                <li class="menu-item">
+                    <a href="QL_NguoiDung.html" class="menu-link">
+                        <span><i class="fa-solid fa-user-gear"></i> Người dùng</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <div class="menu-link">
+                        <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="CH_MAIL.html">Thông báo</a></li>
+                        <li><a href="TC.html">Tiêu chí</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item">
+                    <a href="BCTK.html" class="menu-link">
+                        <span><i class="fa-solid fa-chart-pie"></i> Báo cáo và thống kê</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-header">
+                <div class="uni-name">TRƯỜNG ĐẠI HỌC VĂN LANG</div>
+
+                <div class="header-right-group">
+        
+                <div class="notification-container" id="notifDropdownBtn">
+                    <div class="bell-icon-wrapper">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="notif-badge">3</span> </div>
+                    
+                    <div class="notif-dropdown-menu" id="notifDropdown">
+                        <div class="notif-header">
+                            <span>Thông báo</span>
+                            <a href="#" class="mark-read">Đánh dấu đã đọc</a>
+                        </div>
+                        <div class="notif-body">
+                            <div class="notif-item unread">
+                                <div class="notif-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Nhắc nhở mở đợt đăng ký</p>
+                                    <p class="n-time">Vừa xong</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-check-circle"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Hội đồng KTPM 01 đã được duyệt</p>
+                                    <p class="n-time">1 giờ trước</p>
+                                </div>
+                            </div>
+                            <div class="notif-item">
+                                <div class="notif-icon"><i class="fa-solid fa-file-lines"></i></div>
+                                <div class="notif-content">
+                                    <p class="n-title">Sinh viên nộp báo cáo tiến độ</p>
+                                    <p class="n-time">Yesterday</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="notif-footer">
+                            <a href="#">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="user-dropdown-container" id="userDropdown">
+                    <div class="user-profile">
+                        <div class="user-info-text">
+                            <span class="user-name">Admin 2174802010297</span>
+                            <span class="user-role">BCN Khoa</span>
+                        </div>
+                        <i class="fa-regular fa-circle-user user-avatar-icon"></i>
+                        <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                    </div>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#" class="dropdown-item">
+                                <i class="fa-regular fa-id-badge"></i> Hồ sơ cá nhân
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item logout-item">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+
+            <div class="content-body">
+                <div class="content-card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; border-bottom:1px solid #eee; padding-bottom:15px;">
+                        <h2 class="page-title">Cấu hình tiêu chí chấm điểm</h2>
+                        <a href="index.html" style="color:#666; text-decoration:none; font-size:14px;">
+                            <i class="fa-solid fa-arrow-left"></i> Quay lại
+                        </a>
+                    </div>
+
+                    <div class="setup-header">
+                        <h4 style="margin-bottom:15px; font-size:15px; color:var(--primary-red);">1. Thông tin phiếu chấm</h4>
+                        <div class="setup-grid">
+                            <div class="form-group">
+                                <label>Áp dụng cho đợt:</label>
+                                <select class="form-control">
+                                    <option>DATN_K27_HK1</option>
+                                    <option>DATN_K27_HK2</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Loại phiếu chấm:</label>
+                                <select class="form-control" id="selectRubricType">
+                                    <option value="GVHD">Giảng viên hướng dẫn (GVHD)</option>
+                                    <option value="GVPB">Giảng viên phản biện (GVPB)</option>
+                                    <option value="HD">Hội đồng bảo vệ</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Thang điểm:</label>
+                                <input type="text" class="form-control" value="10" readonly style="background:#f9f9f9;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="margin-bottom:15px; font-size:15px; color:var(--primary-red);">2. Chi tiết tiêu chí</h4>
+                        
+                        <div class="table-responsive">
+                            <table class="criteria-table" id="criteriaTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px; text-align: center;">STT</th>
+                                        <th style="width: 250px;">Tên tiêu chí</th>
+                                        <th>Mô tả / Hướng dẫn chấm</th>
+                                        <th style="width: 100px; text-align: center;">Trọng số (%)</th>
+                                        <th style="width: 100px; text-align: center;">Điểm tối đa</th>
+                                        <th style="width: 50px; text-align: center;">Xóa</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="criteriaBody">
+                                    <tr>
+                                        <td class="text-center stt">1</td>
+                                        <td><input type="text" placeholder="Vd: Hình thức trình bày" value="Hình thức báo cáo"></td>
+                                        <td><textarea rows="1" placeholder="Mô tả chi tiết...">Đúng format, văn phong khoa học, không sai lỗi chính tả.</textarea></td>
+                                        <td><input type="number" class="input-number weight-input" value="10" min="0" max="100"></td>
+                                        <td class="text-center score-display">1.0</td>
+                                        <td class="text-center"><button class="btn-remove-row" onclick="removeRow(this)"><i class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center stt">2</td>
+                                        <td><input type="text" placeholder="Vd: Nội dung thực hiện" value="Nội dung và kết quả"></td>
+                                        <td><textarea rows="1" placeholder="Mô tả chi tiết...">Đáp ứng đủ các yêu cầu đã đề ra, có tính mới.</textarea></td>
+                                        <td><input type="number" class="input-number weight-input" value="40" min="0" max="100"></td>
+                                        <td class="text-center score-display">4.0</td>
+                                        <td class="text-center"><button class="btn-remove-row" onclick="removeRow(this)"><i class="fa-solid fa-trash"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <button class="btn-add-row" onclick="addRow()">
+                            <i class="fa-solid fa-plus"></i> Thêm tiêu chí mới
+                        </button>
+
+                        <div class="total-summary-bar">
+                            <div class="total-label">
+                                Tổng trọng số: <span id="totalWeight" class="total-value">50%</span> 
+                                <span id="weightStatus" style="font-size:12px; color:red; margin-left:10px;">(Chưa đủ 100%)</span>
+                            </div>
+                            <div>
+                                <button class="btn btn-secondary" style="margin-right: 10px;">Hủy bỏ</button>
+                                <button class="btn btn-save" id="btnSaveCriteria" onclick="saveCriteria()">
+                                    <i class="fa-solid fa-floppy-disk"></i> Lưu cấu hình
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    
+    <script src="script.js"></script>
+    <script>
+        // --- LOGIC XỬ LÝ BẢNG TIÊU CHÍ ---
+
+        // 1. Cập nhật STT và Tính tổng
+        function updateTable() {
+            const rows = document.querySelectorAll('#criteriaBody tr');
+            let totalW = 0;
+
+            rows.forEach((row, index) => {
+                // Cập nhật số thứ tự
+                row.querySelector('.stt').innerText = index + 1;
+                
+                // Lấy trọng số
+                const weightInput = row.querySelector('.weight-input');
+                const val = parseFloat(weightInput.value) || 0;
+                totalW += val;
+
+                // Tính điểm tối đa (Thang 10)
+                const score = (val / 100) * 10;
+                row.querySelector('.score-display').innerText = score.toFixed(1);
+            });
+
+            // Cập nhật giao diện tổng
+            const totalDisplay = document.getElementById('totalWeight');
+            const statusDisplay = document.getElementById('weightStatus');
+            
+            totalDisplay.innerText = totalW + '%';
+
+            if (totalW === 100) {
+                totalDisplay.classList.add('total-valid');
+                totalDisplay.style.color = '#28a745';
+                statusDisplay.innerText = '(Hợp lệ)';
+                statusDisplay.style.color = '#28a745';
+                document.getElementById('btnSaveCriteria').disabled = false;
+                document.getElementById('btnSaveCriteria').style.opacity = '1';
+            } else {
+                totalDisplay.classList.remove('total-valid');
+                totalDisplay.style.color = '#D71920';
+                statusDisplay.innerText = `(Chưa đủ 100%. Còn thiếu ${100 - totalW}%)`;
+                if(totalW > 100) statusDisplay.innerText = `(Vượt quá 100%. Dư ${totalW - 100}%)`;
+                
+                statusDisplay.style.color = '#D71920';
+                // Có thể disable nút lưu nếu muốn bắt buộc
+                // document.getElementById('btnSaveCriteria').disabled = true;
+                // document.getElementById('btnSaveCriteria').style.opacity = '0.6';
+            }
+        }
+
+        // 2. Thêm dòng mới
+        function addRow() {
+            const tbody = document.getElementById('criteriaBody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td class="text-center stt"></td>
+                <td><input type="text" placeholder="Nhập tên tiêu chí..."></td>
+                <td><textarea rows="1" placeholder="Mô tả..."></textarea></td>
+                <td><input type="number" class="input-number weight-input" value="0" min="0" max="100"></td>
+                <td class="text-center score-display">0.0</td>
+                <td class="text-center"><button class="btn-remove-row" onclick="removeRow(this)"><i class="fa-solid fa-trash"></i></button></td>
+            `;
+            tbody.appendChild(tr);
+            
+            // Gán lại sự kiện input cho ô mới
+            attachInputEvent(tr.querySelector('.weight-input'));
+            updateTable();
+        }
+
+        // 3. Xóa dòng
+        function removeRow(btn) {
+            const row = btn.closest('tr');
+            row.remove();
+            updateTable();
+        }
+
+        // 4. Gán sự kiện tính toán khi nhập số
+        function attachInputEvent(input) {
+            input.addEventListener('input', updateTable);
+        }
+
+        // 5. Khởi tạo
+        document.addEventListener('DOMContentLoaded', () => {
+            // Gán sự kiện cho các ô trọng số có sẵn
+            document.querySelectorAll('.weight-input').forEach(input => {
+                attachInputEvent(input);
+            });
+            updateTable();
+        });
+
+        // 6. Lưu dữ liệu
+        function saveCriteria() {
+            const totalText = document.getElementById('totalWeight').innerText;
+            if (totalText !== '100%') {
+                alert('Cảnh báo: Tổng trọng số chưa bằng 100%. Vui lòng kiểm tra lại!');
+                return;
+            }
+            alert('Đã lưu cấu hình tiêu chí chấm điểm thành công!');
+            // Code gọi API lưu dữ liệu ở đây
+        }
+    </script>
+</body>
+</html>

@@ -9,6 +9,43 @@
     <link rel="stylesheet" href="/CSS/index.css"> 
     <link rel="stylesheet" href="/CSS/HD_DT.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .filter-wrapper {
+            display: flex;
+            gap: 20px; 
+            align-items: flex-end;
+            width: 100%;
+            flex-wrap: wrap;
+            align-items: flex-end; 
+        }
+
+        .filter-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-item label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .filter-item select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 13px;
+            min-width: 200px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .filter-item select:focus {
+            border-color: var(--primary-red);
+            outline: none;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -60,9 +97,14 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="CH_MAIL.html" class="menu-link">
+                    <div class="menu-link">
                         <span><i class="fa-solid fa-gear"></i> Cấu hình</span>
-                    </a>
+                        <i class="fa-solid fa-chevron-right chevron"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li><a href="CH_MAIL.html">Thông báo</a></li>
+                        <li><a href="TC.html">Tiêu chí</a></li>
+                    </ul>
                 </li>
                 <li class="menu-item">
                     <a href="BCTK.html" class="menu-link">
@@ -147,7 +189,29 @@
                     <h2 class="page-title" style="margin-bottom: 20px;">Quản lý hội đồng duyệt đề tài</h2>
                     
                     <div class="toolbar-row">
-                        <div class="toolbar-left"></div>
+                        <div class="toolbar-left">
+                            <div class="filter-item">
+                                <label for="filterCohort">Đợt đồ án</label>
+                                <select id="filterCohort">
+                                    <option value="">-- Chọn đợt --</option>
+                                    <option value="26">DATN_101</option>
+                                    <option value="27">DATN_102</option>
+                                    <option value="28">DATN_103</option>
+                                </select>
+                            </div>
+                            <div class="filter-item">
+                                <label for="filterCohort">Năm học</label>
+                                <select id="filterCohort">
+                                    <option value="">-- Chọn năm học --</option>
+                                    <option value="26">2023-2024</option>
+                                    <option value="27">2024-2025</option>
+                                    <option value="28">2025-2026</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        
+                        
                         <div class="toolbar-right">
                             <div style="display:flex; align-items:center; gap:5px;">
                                 <span class="filter-label">Tìm kiếm:</span>
@@ -185,8 +249,8 @@
                                             <i class="fa-regular fa-pen-to-square"></i>
                                         </button>
                                         <button class="action-btn btn-approve-icon" onclick="approveCouncil('HDBV003')">
-    <i class="fa-solid fa-check"></i>
-</button>
+                                            <i class="fa-solid fa-check"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>

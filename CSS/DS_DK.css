@@ -2,6 +2,9 @@
     display: flex;
     gap: 20px; 
     align-items: flex-end;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: flex-end; 
 }
 
 .filter-item {
