@@ -154,21 +154,27 @@
                     <div class="info-section">
                         
                         <div class="form-header">
-                            <a href="QL_DS_DeTai.html" class="btn-back-circle" title="Quay lại danh sách">
+                            <a href="DS_DT.html" class="btn-back-circle" title="Quay lại danh sách">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </a>
                             <h3 class="form-title">Chi tiết đề tài</h3>
                         </div>
 
-                        <div class="detail-group">
-                            <label>Tên đề tài:</label>
-                            <input type="text" class="detail-control" id="dtName" readonly>
+                        <div style="display: flex; gap: 20px;">
+                            <div class="detail-group" style="width: 150px;">
+                                <label>Mã đề tài:</label>
+                                <input type="text" class="detail-control" id="dtId" readonly>
+                            </div>
+                            <div class="detail-group" style="flex: 1;">
+                                <label>Tên đề tài:</label>
+                                <input type="text" class="detail-control" id="dtName" readonly>
+                            </div>
                         </div>
 
                         <div style="display: flex; gap: 20px;">
                             <div class="detail-group" style="flex: 1;">
-                                <label>Sinh viên thực hiện:</label>
-                                <input type="text" class="detail-control" id="dtStudent" readonly>
+                                <label>Người đề xuất đề tài:</label>
+                                <input type="text" class="detail-control" id="dtProposer" readonly>
                             </div>
                             <div class="detail-group" style="flex: 1;">
                                 <label>Giảng viên hướng dẫn:</label>
@@ -177,8 +183,18 @@
                         </div>
 
                         <div class="detail-group">
+                            <label>Nhóm thực hiện (Tối đa 2 thành viên):</label>
+                            <input type="text" class="detail-control" id="dtGroup" readonly>
+                        </div>
+
+                        <div class="detail-group">
                             <label>Mục tiêu chính:</label>
                             <textarea class="detail-control" id="dtGoal" readonly></textarea>
+                        </div>
+
+                        <div class="detail-group">
+                            <label>Phạm vi và chức năng:</label>
+                            <textarea class="detail-control" id="dtScope" readonly style="height: 120px;"></textarea>
                         </div>
 
                         <div class="detail-group">
@@ -187,13 +203,13 @@
                         </div>
 
                         <div class="detail-group">
-                            <label>Kết quả dự kiến:</label>
-                            <textarea class="detail-control" id="dtResult" readonly></textarea>
+                            <label>Yêu cầu tính mới:</label>
+                            <textarea class="detail-control" id="dtRequirement" readonly></textarea>
                         </div>
 
                         <div class="detail-group">
-                            <label>Yêu cầu / Tính mới:</label>
-                            <textarea class="detail-control" id="dtRequirement" readonly></textarea>
+                            <label>Sản phẩm kết quả dự kiến:</label>
+                            <textarea class="detail-control" id="dtResult" readonly></textarea>
                         </div>
                     </div>
 
@@ -236,30 +252,38 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // MOCK DATA
+            // 1. DỮ LIỆU GIẢ LẬP (MỚI)
             const projectData = {
+                id: "DT-2025-001",
                 name: "Kiến trúc Học sâu lai cho phân đoạn khối u não trên ảnh MRI đa phương thức với Bộ dữ liệu BraTS",
-                student: "Trương Quốc Duy (2174802010297)",
+                proposer: "Trương Quốc Duy",
                 supervisor: "Ngô Thị Tuyết Như",
+                group: "Trương Quốc Duy (2174802010297), Nguyễn Văn A (2174802010123)",
                 goal: "Xây dựng mô hình AI có khả năng phân đoạn khối u não với độ chính xác cao trên 90% Dice Score.",
-                tech: "Python, PyTorch, U-Net, Transformer, Docker",
-                result: "Mô hình đã huấn luyện, Web App Demo, Bài báo khoa học.",
-                requirement: "Sử dụng kiến trúc lai giữa CNN và Transformer để tối ưu hóa việc trích xuất đặc trưng toàn cục và cục bộ.",
+                scope: "Phạm vi: Nghiên cứu trên bộ dữ liệu BraTS 2021. Chức năng: Upload ảnh MRI, Phân đoạn tự động, Xuất báo cáo y khoa, Tích hợp API cho bệnh viện.",
+                tech: "Python, PyTorch, U-Net, Transformer, Docker, ReactJS",
+                requirement: "Sử dụng kiến trúc lai giữa CNN và Transformer để tối ưu hóa việc trích xuất đặc trưng toàn cục và cục bộ. Cải thiện tốc độ xử lý so với các model cũ.",
+                result: "Mô hình đã huấn luyện (.pth), Web App Demo, Bài báo khoa học đăng trên tạp chí VLU.",
                 status: "Đang chờ duyệt",
                 comment: ""
             };
 
-            // FILL DATA
+            // 2. FILL DỮ LIỆU VÀO CÁC Ô
+            document.getElementById('dtId').value = projectData.id;
             document.getElementById('dtName').value = projectData.name;
-            document.getElementById('dtStudent').value = projectData.student;
+            document.getElementById('dtProposer').value = projectData.proposer;
             document.getElementById('dtSupervisor').value = projectData.supervisor;
+            document.getElementById('dtGroup').value = projectData.group;
+            
             document.getElementById('dtGoal').value = projectData.goal;
+            document.getElementById('dtScope').value = projectData.scope; // Trường mới
             document.getElementById('dtTech').value = projectData.tech;
-            document.getElementById('dtResult').value = projectData.result;
             document.getElementById('dtRequirement').value = projectData.requirement;
+            document.getElementById('dtResult').value = projectData.result;
             
             updateStatusUI(projectData.status);
 
+            // 3. LOGIC NÚT DUYỆT/TỪ CHỐI (GIỮ NGUYÊN)
             const btnApprove = document.getElementById('btnApprove');
             const btnReject = document.getElementById('btnReject');
             const adminComment = document.getElementById('adminComment');
