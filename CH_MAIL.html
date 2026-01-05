@@ -210,8 +210,6 @@
                         <div class="tab-btn" onclick="openTab(event, 'tabDeXuat')">Đề xuất đề tài</div>
                         <div class="tab-btn" onclick="openTab(event, 'tabDuyet')">Duyệt đề tài</div>
                         <div class="tab-btn" onclick="openTab(event, 'tabDiem')">Kết quả điểm</div>
-                        <div class="tab-btn" onclick="openTab(event, 'tabChung')">Thông báo chung</div>
-                        <div class="tab-btn" onclick="openTab(event, 'tabCaNhan')">Cá nhân</div>
                     </div>
 
                     <div id="tabNguyenVong" class="tab-content active">
@@ -298,9 +296,9 @@
                                     </div>
                                 </div>
                                 
-                                <button class="btn btn-secondary" style="width:100%; margin-top:10px;">
+                                <!-- <button class="btn btn-secondary" style="width:100%; margin-top:10px;">
                                     <i class="fa-regular fa-paper-plane"></i> Gửi thử mail mẫu
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                     </div>
@@ -310,24 +308,63 @@
                             <div class="config-left">
                                 <div class="form-group" style="margin-bottom: 15px;">
                                     <label>Tiêu đề Email:</label>
-                                    <input type="text" class="form-control" value="[VLU] Thông báo nộp đề xuất đề tài">
+                                    <input type="text" class="form-control" value="[VLU] Thông báo mở đợt Đăng ký nguyện vọng - {Ten_Dot}">
                                 </div>
-                                <div class="email-editor">
-                                    <div class="editor-toolbar">...</div>
-                                    <div class="editor-content" contenteditable="true">
-                                        <p>Kính gửi Giảng viên <b>{Ten_Giang_Vien}</b>,</p>
-                                        <p>Hệ thống đã mở cổng nộp đề xuất đề tài cho đợt {Ten_Dot}.</p>
+                                
+                                <div class="form-group">
+                                    <label style="display:flex; justify-content:space-between;">
+                                        Nội dung Email:
+                                        <div style="font-weight:normal; font-size:12px;">
+                                            Biến có sẵn: 
+                                            <span class="var-tag">{Ten_Sinh_Vien}</span>
+                                            <span class="var-tag">{Ten_Dot}</span>
+                                            <span class="var-tag">{Ngay_Bat_Dau}</span>
+                                            <span class="var-tag">{Ngay_Ket_Thuc}</span>
+                                        </div>
+                                    </label>
+                                    
+                                    <div class="email-editor">
+                                        <div class="editor-toolbar">
+                                            <button class="tool-btn"><b>B</b></button>
+                                            <button class="tool-btn"><i>I</i></button>
+                                            <button class="tool-btn"><u>U</u></button>
+                                            <button class="tool-btn">Link</button>
+                                        </div>
+                                        <div class="editor-content" contenteditable="true">
+                                            <p>Chào sinh viên <b>{Ten_Sinh_Vien}</b>,</p>
+                                            <p>Khoa Công nghệ thông tin thông báo mở đợt đăng ký nguyện vọng đồ án <b>{Ten_Dot}</b>.</p>
+                                            <p>Thời gian đăng ký:</p>
+                                            <ul>
+                                                <li>Bắt đầu: {Ngay_Bat_Dau}</li>
+                                                <li>Kết thúc: {Ngay_Ket_Thuc}</li>
+                                            </ul>
+                                            <p>Vui lòng đăng nhập hệ thống để thực hiện đăng ký đúng hạn.</p>
+                                            <p>Trân trọng,<br>Ban chủ nhiệm Khoa.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="config-right">
-                                <div class="trigger-item">
+                                <!-- <div class="trigger-item">
                                     <div class="trigger-header">
                                         <span><i class="fa-regular fa-calendar-check"></i> Khi mở đợt</span>
                                         <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
                                     </div>
+                                </div> -->
+                                <div class="trigger-item">
+                                    <div class="trigger-header">
+                                        <span><i class="fa-solid fa-bell"></i> Nhắc nhở sắp mở</span>
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="trigger-body">
+                                        Gửi trước <input type="number" class="small-input" value="1"> ngày khi đợt bắt đầu.
+                                    </div>
                                 </div>
                                 <div class="trigger-item">
+                                    
                                     <div class="trigger-header">
                                         <span><i class="fa-solid fa-hourglass-half"></i> Deadline nộp đề tài</span>
                                         <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
@@ -340,10 +377,153 @@
                         </div>
                     </div>
                     
-                    <div id="tabDuyet" class="tab-content"><p style="padding:20px; color:#666;">Cấu hình cho thông báo Duyệt đề tài...</p></div>
-                    <div id="tabDiem" class="tab-content"><p style="padding:20px; color:#666;">Cấu hình cho thông báo Kết quả điểm...</p></div>
-                    <div id="tabChung" class="tab-content"><p style="padding:20px; color:#666;">Cấu hình cho Thông báo chung...</p></div>
-                    <div id="tabCaNhan" class="tab-content"><p style="padding:20px; color:#666;">Cấu hình cho Thông báo cá nhân...</p></div>
+                    <div id="tabDuyet" class="tab-content">
+                        <div class="config-section">
+                            <div class="config-left">
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label>Tiêu đề Email:</label>
+                                    <input type="text" class="form-control" value="[VLU] Thông báo mở đợt Đăng ký nguyện vọng - {Ten_Dot}">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label style="display:flex; justify-content:space-between;">
+                                        Nội dung Email:
+                                        <div style="font-weight:normal; font-size:12px;">
+                                            Biến có sẵn: 
+                                            <span class="var-tag">{Ten_Sinh_Vien}</span>
+                                            <span class="var-tag">{Ten_Dot}</span>
+                                            <span class="var-tag">{Ngay_Bat_Dau}</span>
+                                            <span class="var-tag">{Ngay_Ket_Thuc}</span>
+                                        </div>
+                                    </label>
+                                    
+                                    <div class="email-editor">
+                                        <div class="editor-toolbar">
+                                            <button class="tool-btn"><b>B</b></button>
+                                            <button class="tool-btn"><i>I</i></button>
+                                            <button class="tool-btn"><u>U</u></button>
+                                            <button class="tool-btn">Link</button>
+                                        </div>
+                                        <div class="editor-content" contenteditable="true">
+                                            <p>Chào sinh viên <b>{Ten_Sinh_Vien}</b>,</p>
+                                            <p>Khoa Công nghệ thông tin thông báo mở đợt đăng ký nguyện vọng đồ án <b>{Ten_Dot}</b>.</p>
+                                            <p>Thời gian đăng ký:</p>
+                                            <ul>
+                                                <li>Bắt đầu: {Ngay_Bat_Dau}</li>
+                                                <li>Kết thúc: {Ngay_Ket_Thuc}</li>
+                                            </ul>
+                                            <p>Vui lòng đăng nhập hệ thống để thực hiện đăng ký đúng hạn.</p>
+                                            <p>Trân trọng,<br>Ban chủ nhiệm Khoa.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="config-right">
+                                <!-- <div class="trigger-item">
+                                    <div class="trigger-header">
+                                        <span><i class="fa-regular fa-calendar-check"></i> Khi mở đợt</span>
+                                        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                                    </div>
+                                </div> -->
+                                <div class="trigger-item">
+                                    <div class="trigger-header">
+                                        <span><i class="fa-solid fa-bell"></i> Nhắc nhở sắp mở</span>
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="trigger-body">
+                                        Gửi trước <input type="number" class="small-input" value="1"> ngày khi đợt bắt đầu.
+                                    </div>
+                                </div>
+                                <div class="trigger-item">
+                                    
+                                    <div class="trigger-header">
+                                        <span><i class="fa-solid fa-hourglass-half"></i> Deadline nộp đề tài</span>
+                                        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                                    </div>
+                                    <div class="trigger-body">
+                                        Gửi trước <input type="number" class="small-input" value="3"> ngày.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tabDiem" class="tab-content">
+                        <div class="config-section">
+                            <div class="config-left">
+                                <div class="form-group" style="margin-bottom: 15px;">
+                                    <label>Tiêu đề Email:</label>
+                                    <input type="text" class="form-control" value="[VLU] Thông báo mở đợt Đăng ký nguyện vọng - {Ten_Dot}">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label style="display:flex; justify-content:space-between;">
+                                        Nội dung Email:
+                                        <div style="font-weight:normal; font-size:12px;">
+                                            Biến có sẵn: 
+                                            <span class="var-tag">{Ten_Sinh_Vien}</span>
+                                            <span class="var-tag">{Ten_Dot}</span>
+                                            <span class="var-tag">{Ngay_Bat_Dau}</span>
+                                            <span class="var-tag">{Ngay_Ket_Thuc}</span>
+                                        </div>
+                                    </label>
+                                    
+                                    <div class="email-editor">
+                                        <div class="editor-toolbar">
+                                            <button class="tool-btn"><b>B</b></button>
+                                            <button class="tool-btn"><i>I</i></button>
+                                            <button class="tool-btn"><u>U</u></button>
+                                            <button class="tool-btn">Link</button>
+                                        </div>
+                                        <div class="editor-content" contenteditable="true">
+                                            <p>Chào sinh viên <b>{Ten_Sinh_Vien}</b>,</p>
+                                            <p>Khoa Công nghệ thông tin thông báo mở đợt đăng ký nguyện vọng đồ án <b>{Ten_Dot}</b>.</p>
+                                            <p>Thời gian đăng ký:</p>
+                                            <ul>
+                                                <li>Bắt đầu: {Ngay_Bat_Dau}</li>
+                                                <li>Kết thúc: {Ngay_Ket_Thuc}</li>
+                                            </ul>
+                                            <p>Vui lòng đăng nhập hệ thống để thực hiện đăng ký đúng hạn.</p>
+                                            <p>Trân trọng,<br>Ban chủ nhiệm Khoa.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="config-right">
+                                <!-- <div class="trigger-item">
+                                    <div class="trigger-header">
+                                        <span><i class="fa-regular fa-calendar-check"></i> Khi mở đợt</span>
+                                        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                                    </div>
+                                </div> -->
+                                <div class="trigger-item">
+                                    <div class="trigger-header">
+                                        <span><i class="fa-solid fa-bell"></i> Nhắc nhở sắp mở</span>
+                                        <label class="switch">
+                                            <input type="checkbox">
+                                            <span class="slider"></span>
+                                        </label>
+                                    </div>
+                                    <div class="trigger-body">
+                                        Gửi trước <input type="number" class="small-input" value="1"> ngày khi đợt bắt đầu.
+                                    </div>
+                                </div>
+                                <div class="trigger-item">
+                                    
+                                    <div class="trigger-header">
+                                        <span><i class="fa-solid fa-hourglass-half"></i> Deadline nộp đề tài</span>
+                                        <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+                                    </div>
+                                    <div class="trigger-body">
+                                        Gửi trước <input type="number" class="small-input" value="3"> ngày.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 
 
                 </div>
             </div>

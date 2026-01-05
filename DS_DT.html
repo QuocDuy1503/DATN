@@ -331,7 +331,12 @@
                             <td>${p.supervisor}</td>
                             <td class="col-major">${p.major}</td>
                             <td class="${statusClass}">${p.status}</td>
-                            <td><a href="CT_DT.html?id=${p.id}" class="link-detail">Xem chi tiết đề tài</a></td>
+                            
+                            <td class="text-center">
+                            <a href="CT_DT.html?id=${p.id}" class="link-detail title="Xem chi tiết đề tài">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                        </td>
                         </tr>
                     `;
                     tableBody.innerHTML += row;

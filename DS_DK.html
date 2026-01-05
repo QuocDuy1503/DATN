@@ -9,6 +9,29 @@
     <link rel="stylesheet" href="/CSS/index.css"> 
     <link rel="stylesheet" href="/CSS/DS_DK.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    .btn-view-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border: none;
+        /* background-color: #e3f2fd; 
+        color: #007bff;            */
+        border-radius: 50%;        
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+    }
+/* 
+    .btn-view-icon:hover {
+        background-color: #007bff; 
+        color: white;              
+        transform: scale(1.1);    
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    } */
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -266,7 +289,11 @@
                         <td>${sv.major}</td>
                         <td>${sv.credits}</td>
                         <td class="status-text ${statusClass}">${sv.status}</td>
-                        <td><a href="KQHT.html" class="link-detail">Xem chi tiết KQ</a></td>
+                        <td class="text-center">
+                            <a href="KQHT.html" class="btn-view-icon" title="Xem chi tiết kết quả">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                        </td>
                     `;
                     tableBody.appendChild(row);
                 });
